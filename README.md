@@ -10,8 +10,9 @@ Astro + React + Tailwind, conformément au cahier des charges (§5).
 |---|---|
 | `index.html` | la page entière — styles, contenu et visuels (encodés en base64) |
 | `support.js` | runtime de la maquette (charge React depuis unpkg) |
-| `image-slot.js` | composant d'affichage des visuels |
-| `.image-slots.state.json` | volontairement vide : les visuels sont déjà dans `index.html`, ce fichier évite seulement un 404 |
+
+Tous les visuels sont de simples `<img>` encodées dans `index.html` : aucun
+composant d'image, donc rien qui puisse capturer le geste tactile.
 
 ## Déploiement
 
