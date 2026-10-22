@@ -1,0 +1,11 @@
+# SunyGreen — https://www.sunygreen.com
+# Le site est entierement public et destine a etre indexe : evaluateurs
+# europeens, partenaires et industriels doivent pouvoir le trouver.
+
+User-agent: *
+Allow: /
+
+# Rien a exclure : pas d'espace prive, pas de moteur de recherche interne,
+# pas de page de resultats generant des adresses infinies.
+
+Sitemap: https://www.sunygreen.com/sitemap.xml

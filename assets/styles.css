@@ -1,0 +1,1380 @@
+/* ===================================================================
+   Sora — police unique du site, servie depuis ce serveur.
+   Fichier variable (graisses 300 a 800 dans un seul fichier) : deux
+   requetes au total, contre huit avec les instances statiques.
+
+   Elle n'est deliberement PAS chargee depuis Google Fonts : cet appel
+   transmettrait l'adresse IP de chaque visiteur a un serveur hors Union
+   europeenne, ce qui obligerait a le declarer — et a le faire consentir —
+   sur un site public finance par l'UE. Servie d'ici, la question ne se pose
+   plus, et la page economise deux connexions vers un domaine tiers.
+
+   Sora, licence SIL Open Font License 1.1 : l'auto-hebergement et la
+   redistribution sont explicitement autorises. Fichiers recuperes depuis
+   Google Fonts le 30 aout 2026 (version v17), puis servis d'ici.
+   =================================================================== */
+@font-face{
+  font-family:'Sora';
+  font-style:normal;
+  font-weight:300 800;      /* fichier variable : une seule ressource */
+  font-display:swap;        /* le texte s'affiche tout de suite, en police systeme */
+  src:url('fonts/sora-latin.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:'Sora';
+  font-style:normal;
+  font-weight:300 800;
+  font-display:swap;
+  src:url('fonts/sora-latin-ext.woff2') format('woff2');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
+/* ===================================================================
+   SunyGreen — feuille de style unique.
+   Direction : noir cinematique, photo plein cadre, titres capitales
+   serrees, boutons capitales espacees. Reference : SpaceX / Starlink /
+   The Boring Company.
+   Tout passe par des classes : plus aucun style inline dans la page,
+   donc plus aucun !important necessaire.
+   =================================================================== */
+
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none !important}
+
+:root{
+  /* Fonds sombres : noir tres legerement verdi plutot que noir pur. La page
+     respire davantage sans perdre le contraste des photos. */
+  --bg:#070A08;
+  --panel:#0C110E;
+  --raise:#141A16;
+  --line:rgba(255,255,255,0.13);
+  --line-soft:rgba(255,255,255,0.07);
+  --fg:#fff;
+  --muted:#A3ADA6;
+  --dim:#78837B;
+
+  /* Fonds clairs, repris du PDF de communication : ce sont eux qui evitent
+     que la page soit une longue plage noire. */
+  --cream:#F2F5EC;
+  --cream-2:#E7ECDE;
+  --ink:#132A19;                    /* vert forêt tres sombre : titres sur clair */
+  --ink-soft:#414F45;
+  --ink-dim:#59655C;
+  --line-ink:rgba(19,42,25,0.16);
+  --line-ink-soft:rgba(19,42,25,0.09);
+
+  /* Deux accents, deux roles distincts.
+     Ambre  = energie, lumiere, marque.
+     Vert   = benefice, validation, durabilite (c'est le code du PDF). */
+  --amber:#FDB022;
+  --green:#8CC63F;
+  --green-deep:#3D6B15;             /* version lisible sur fond clair */
+
+  --wrap:1360px;
+  --gut:48px;
+  --nav:72px;
+}
+
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--fg);
+  font-family:'Sora',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+a,button{-webkit-tap-highlight-color:rgba(253,176,34,0.2)}
+section[id],header[id],footer[id]{scroll-margin-top:var(--nav)}
+
+/* ---------- primitives ---------- */
+/* Filet de securite : clip (et non hidden) ne cree pas de conteneur de
+   defilement, la barre de navigation collante reste donc collante. Evite
+   qu'un element deborde et fasse apparaitre une barre horizontale. */
+.sg-root{overflow-x:clip}
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
+
+.eyebrow{
+  font-size:11px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;
+  color:var(--amber);margin:0 0 18px;
+}
+.eyebrow--dim{color:var(--dim)}
+
+/* Capitales serrees : la signature typographique des sites de reference. */
+h1,h2{text-transform:uppercase;font-weight:800;margin:0;text-wrap:balance}
+h1{font-size:clamp(34px,6.6vw,86px);line-height:0.96;letter-spacing:-0.03em}
+h2{font-size:clamp(27px,4.4vw,56px);line-height:1.02;letter-spacing:-0.025em}
+h3{font-size:19px;font-weight:700;letter-spacing:-0.01em;margin:0}
+
+.lead{font-size:clamp(15px,1.35vw,18px);line-height:1.65;color:#C6CACE;margin:0;text-wrap:pretty}
+h2 + .lead{margin-top:18px}
+.body{font-size:14.5px;line-height:1.68;color:var(--muted);margin:0;text-wrap:pretty}
+.fine{font-size:12px;line-height:1.6;color:var(--dim);margin:0}
+
+/* ---------- boutons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:inherit;font-size:12px;font-weight:700;letter-spacing:0.14em;
+  text-transform:uppercase;padding:15px 32px;border-radius:2px;cursor:pointer;
+  border:1px solid transparent;transition:background .18s ease,color .18s ease,border-color .18s ease;
+  white-space:nowrap;
+}
+.btn--solid{background:var(--fg);color:#000}
+.btn--solid:hover{background:var(--amber)}
+.btn--ghost{border-color:rgba(255,255,255,0.45);color:var(--fg)}
+.btn--ghost:hover{background:var(--fg);color:#000;border-color:var(--fg)}
+.btn-row{display:flex;flex-wrap:wrap;gap:12px}
+
+/* ---------- barre de navigation ---------- */
+.nav{
+  position:sticky;top:0;z-index:60;height:var(--nav);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--gut);
+  background:transparent;border-bottom:1px solid transparent;
+  transition:background .25s ease,border-color .25s ease,backdrop-filter .25s ease;
+}
+.nav.is-stuck{background:rgba(0,0,0,0.82);backdrop-filter:blur(14px);border-bottom-color:var(--line-soft)}
+/* Le logo est un lockup complet : symbole, nom de la marque et baseline.
+   Rien ne s'ecrit a cote — le nom y figure deja, et dans sa propre
+   typographie. On raisonne donc en hauteur, la largeur suit le rapport 3:1
+   du fichier. */
+.brand{display:flex;align-items:center}
+.brand img{height:46px;width:auto;object-fit:contain}
+/* Le pied de page a de la place : le logo y respire davantage. */
+.foot .brand img{height:60px}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{
+  font-size:11.5px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;
+  color:#C6CACE;transition:color .16s ease;
+}
+.nav-links a:hover{color:var(--fg)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.burger{display:flex;flex-direction:column;gap:5px;padding:8px 2px;background:none;border:0;cursor:pointer}
+.burger span{width:22px;height:1.5px;background:var(--fg);display:block;transition:transform .22s ease,opacity .22s ease}
+.burger.is-open span:first-child{transform:translateY(3.25px) rotate(45deg)}
+.burger.is-open span:last-child{transform:translateY(-3.25px) rotate(-45deg)}
+
+.menu{
+  position:absolute;top:100%;right:var(--gut);width:300px;
+  background:rgba(8,9,10,0.97);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-top:0;padding:10px;
+  display:flex;flex-direction:column;gap:2px;
+  animation:menuIn .18s ease-out;
+}
+@keyframes menuIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.menu a{
+  padding:14px;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  color:#C6CACE;transition:background .15s ease,color .15s ease;
+}
+.menu a:hover{background:rgba(255,255,255,0.06);color:var(--fg)}
+.menu .btn{margin-top:8px}
+
+/* ---------- cadrage dirige des photos plein cadre ----------
+   Ces quatre photos sont en 16/9 avec le sujet dans le tiers droit. Un
+   recadrage centre le fait sortir du cadre des que le format se resserre.
+   object-position exprime la repartition du debordement, pas une position
+   absolue : un seul pourcentage tient donc du grand ecran au telephone,
+   sans media query ni seconde version de l'image. */
+.hero-media img,.sec-media img{width:100%;height:100%;object-fit:cover}
+/* Leger zoom arriere a l'ouverture : la page demarre en mouvement. */
+.hero-media img{animation:ouverture 20s ease-out both}
+@keyframes ouverture{from{transform:scale(1.08)}to{transform:scale(1)}}
+/* La marge de 6% donne au parallaxe de quoi bouger sans decouvrir les bords. */
+.sec-media img{transform:scale(1.06);will-change:transform}
+@media (prefers-reduced-motion:reduce){
+  .hero-media img{animation:none}
+  .sec-media img{transform:none}
+}
+#photo-accueil{object-position:76% center}
+
+/* ---------- accueil ---------- */
+.hero{position:relative;min-height:calc(100vh - var(--nav));min-height:calc(100svh - var(--nav));display:flex;overflow:hidden}
+.hero-media{position:absolute;inset:0}
+.hero-scrim{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(0,0,0,0.90) 0%,rgba(0,0,0,0.55) 42%,rgba(0,0,0,0.05) 100%),
+             linear-gradient(0deg,var(--bg) 0%,rgba(7,10,8,0.35) 32%,transparent 60%)}
+.hero-inner{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;
+  padding-bottom:96px;padding-top:80px}
+.hero-copy{max-width:920px}
+.hero h1{margin-bottom:22px}
+.hero .lead{max-width:520px;margin-bottom:34px}
+.hero .btn-row{margin-top:2px}
+
+.scroll-cue{
+  position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:3;
+  width:22px;height:22px;border-right:1.5px solid rgba(255,255,255,0.55);
+  border-bottom:1.5px solid rgba(255,255,255,0.55);rotate:45deg;
+  animation:cue 2.2s ease-in-out infinite;
+}
+@keyframes cue{0%,100%{opacity:.25;translate:0 -5px}50%{opacity:.9;translate:0 3px}}
+
+/* ---------- bandeau de chiffres ----------
+   La marque s'appelle desormais SunyGreen : le vert cesse d'etre un accent
+   pour devenir une vraie plage de couleur, juste sous l'accueil. */
+/* Vert vif + texte tres fonce, comme les pages claires du PDF. Le blanc sur
+   vert vif tombait a 2.1:1 ; ici le rapport reste >= 5.4:1 sur toute la
+   longueur du degrade, et le bandeau gagne en luminosite. */
+/* Meme vert sourd que la section Comparatif : une teinte posee sur le fond
+   sombre, pas un aplat sature. Le bandeau reste une respiration coloree
+   sans crier entre l'accueil et le premier panneau photo. */
+/* Aucun filet en haut ni en bas : le bandeau se fond dans les photos qui
+   l'encadrent au lieu d'etre une bande rapportee. */
+.stats{
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(130% 90% at 50% 0%, rgba(140,198,63,0.08), transparent 62%),
+    var(--panel);
+}
+/* halo vert qui derive lentement : le fond n'est pas un aplat mort */
+.stats::after{
+  content:'';position:absolute;inset:-40% -10%;pointer-events:none;
+  background:radial-gradient(45% 60% at 50% 50%,rgba(140,198,63,0.10),transparent 70%);
+  animation:balayage 16s ease-in-out infinite;
+}
+@keyframes balayage{0%,100%{transform:translateX(-28%)}50%{transform:translateX(28%)}}
+.stats .wrap{position:relative;z-index:1}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+/* separateurs neutres : ils structurent les trois colonnes sans reintroduire
+   de vert, qui redessinait les contours du bandeau */
+.stat{padding:44px 0;border-left:1px solid var(--line-soft)}
+.stat:first-child{border-left:0}
+.stat-k{font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--dim);margin:0 0 10px;padding-left:28px}
+.stat-v{font-size:clamp(28px,3.4vw,44px);font-weight:800;letter-spacing:-0.03em;line-height:1;padding-left:28px}
+.stat-u{font-size:13px;color:var(--muted);margin:8px 0 0;padding-left:28px}
+.stat:first-child .stat-k,.stat:first-child .stat-v,.stat:first-child .stat-u{padding-left:0}
+
+/* ---------- panneaux photo plein cadre ---------- */
+
+/* ---------- sections neutres ---------- */
+.sec{padding:120px 0;background:var(--bg)}
+/* Halo vert diffus en haut des sections sombres : evite l'aplat noir mort
+   et reprend l'ambiance lumineuse du PDF. */
+.sec--panel{
+  background:
+    radial-gradient(130% 90% at 50% 0%, rgba(140,198,63,0.08), transparent 62%),
+    var(--panel);
+}
+.sec-head{max-width:720px;margin-bottom:56px}
+.sec-head--center{margin-left:auto;margin-right:auto;text-align:center}
+.sec-head h2{margin-bottom:16px}
+
+/* ---------- sections claires ----------
+   Le PDF alterne pages noires et pages creme ; c'est ce rythme qui rend
+   l'ensemble accueillant. Tout ce qui suit ne fait que reprendre les memes
+   composants en inversant les valeurs. */
+.sec--light{
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgba(140,198,63,0.16), transparent 58%),
+    var(--cream);
+  color:var(--ink);
+}
+.sec--light h2,.sec--light h3,.sec--light .stat-v{color:var(--ink)}
+.sec--light .eyebrow{color:var(--green-deep)}
+.sec--light .lead{color:var(--ink-soft)}
+.sec--light .body,.sec--light .stat-u,.sec--light .card-li{color:#5A655C}
+.sec--light .fine,.sec--light .stat-k,.sec--light .step-k{color:var(--ink-dim)}
+/* L'ambre est illisible sur creme (~1.8:1). Sur fond clair, c'est le vert
+   profond qui porte l'accent ; l'ambre reste reserve aux fonds sombres. */
+.sec--light .partner-loc{color:var(--green-deep)}
+.sec--light .card-li::before{background:var(--green-deep)}
+
+/* grilles a filets : sur fond clair les filets blancs disparaissent */
+.sec--light .grid-3,.sec--light .grid-4{background:var(--line-ink)}
+.sec--light .card,.sec--light .partner{background:var(--cream)}
+.sec--light .card:hover,.sec--light .partner:hover{background:var(--cream-2)}
+.sec--light .card-foot{border-top-color:var(--line-ink)}
+.sec--light .impact{border-top-color:var(--line-ink)}
+.sec--light .impact--on{border-top-color:var(--green-deep)}
+
+/* onglets */
+.sec--light .tab{border-color:var(--line-ink);color:var(--ink-soft)}
+.sec--light .tab.is-on{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+
+/* feuille de route sur fond clair */
+.sec--light .step::before{background:var(--line-ink)}
+.sec--light .step::after{background:var(--ink-dim)}
+.sec--light .step--on::after{background:var(--green-deep)}
+.sec--light .step--on .step-k{color:var(--green-deep)}
+
+/* formulaire de contact sur fond clair */
+.sec--light .meta-row{color:var(--ink-soft)}
+.sec--light .meta-k{color:var(--ink-dim)}
+.sec--light .field > span{color:var(--ink-dim)}
+.sec--light .field input,.sec--light .field textarea{color:var(--ink);border-bottom-color:var(--line-ink)}
+.sec--light .field input::placeholder,.sec--light .field textarea::placeholder{color:#96A199}
+.sec--light .field input:focus,.sec--light .field textarea:focus{border-bottom-color:var(--green-deep)}
+
+/* boutons */
+.sec--light .btn--solid{background:var(--ink);color:var(--cream)}
+.sec--light .btn--solid:hover{background:var(--green-deep)}
+.sec--light .btn--ghost{border-color:var(--line-ink);color:var(--ink)}
+.sec--light .btn--ghost:hover{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+
+/* ---------- onglets ---------- */
+.tabs{display:flex;justify-content:center;gap:0;margin-bottom:48px}
+.tab{
+  font-family:inherit;font-size:11.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  padding:13px 26px;background:none;border:1px solid var(--line);color:var(--muted);cursor:pointer;
+  transition:background .18s ease,color .18s ease;
+}
+.tab + .tab{border-left:0}
+.tab.is-on{background:var(--fg);color:#000;border-color:var(--fg)}
+
+/* ---------- cartes plates ---------- */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft)}
+.card{background:var(--panel);padding:40px 34px;display:flex;flex-direction:column;
+  transition:background .2s ease}
+.card:hover{background:var(--raise)}
+.card h3{margin-bottom:12px}
+.card .body{flex:1;margin-bottom:26px}
+.card-list{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.card-li{display:flex;gap:11px;font-size:13.5px;color:#C6CACE;line-height:1.5}
+.card-li::before{content:'';flex:none;width:5px;height:5px;background:var(--green);margin-top:7px}
+.card-foot{border-top:1px solid var(--line-soft);padding-top:20px}
+.card-foot .stat-k{padding-left:0;margin-bottom:6px;font-size:10px}
+.card-foot .stat-v{padding-left:0;font-size:26px}
+.card-foot .stat-u{padding-left:0;display:inline;font-size:13px;margin-left:8px}
+
+/* ---------- vignettes terrain ---------- */
+/* Le cadre doit rester lisible meme avec une photo tres sombre : sans ce
+   filet, une image noire se confond avec le fond noir de la page et la
+   vignette parait collee au fond. Le leger arrondi la designe comme un
+   cadre plutot que comme une zone de la page. */
+
+/* ---------- tableau comparatif ---------- */
+.cmp{width:100%;border-collapse:collapse;font-size:14px}
+.cmp th,.cmp td{text-align:left;padding:18px 20px;border-bottom:1px solid var(--line-soft)}
+.cmp thead th{
+  font-size:10.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--dim);border-bottom-color:var(--line);
+}
+.cmp tbody th{font-weight:600;color:var(--fg);width:26%}
+.cmp td{color:var(--muted)}
+.cmp .col-us{background:rgba(140,198,63,0.07);color:var(--fg);font-weight:600}
+.cmp thead .col-us{color:var(--green)}
+.cmp tbody tr:last-child td,.cmp tbody tr:last-child th{border-bottom:0}
+.cmp-note{margin-top:22px}
+/* Indice de defilement du tableau : affiche uniquement en dessous de 820px.
+   Doit rester AVANT les media queries, sinon il les ecrase. */
+.cmp-hint{display:none;margin-top:16px;text-align:center}
+
+/* ---------- consortium ---------- */
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-soft)}
+.partner{background:var(--panel);padding:34px 28px;transition:background .2s ease}
+.partner:hover{background:var(--raise)}
+/* Les fichiers de logos ont un fond blanc incrusté. Plutôt que de laisser
+   quatre rectangles blancs de tailles différentes flotter sur le noir, on
+   assume une pastille blanche identique pour les quatre. Son rapport (3.4)
+   est calé sur celui des logos pour que le « contain » ne laisse presque
+   aucune bande. */
+.partner-logo{
+  width:100%;max-width:214px;aspect-ratio:214/63;
+  background:#fff;border-radius:3px;margin-bottom:26px;overflow:hidden;
+}
+.partner-logo img{width:100%;height:100%;object-fit:contain}
+.partner h3{font-size:16px;margin-bottom:6px}
+.partner-loc{font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--amber);margin:0 0 10px}
+
+/* ---------- feuille de route ---------- */
+.rail{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:12px}
+.step{position:relative;padding-top:34px}
+.step::before{content:'';position:absolute;top:0;left:0;right:-32px;height:1px;background:var(--line-soft)}
+.step:last-child::before{right:0}
+.step::after{content:'';position:absolute;top:-3.5px;left:0;width:8px;height:8px;border-radius:50%;
+  background:var(--dim)}
+.step--on::after{background:var(--green)}
+.step-k{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--dim);margin:0 0 12px}
+.step--on .step-k{color:var(--green)}
+.step h3{font-size:17px;margin-bottom:10px}
+
+/* ---------- impact ---------- */
+.impact{border-top:2px solid var(--line);padding-top:24px}
+.impact--on{border-top-color:var(--green)}
+.impact h3{margin-bottom:12px}
+
+/* ---------- contact ---------- */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+.contact-meta{margin-top:30px;display:flex;flex-direction:column;gap:14px}
+.meta-row{display:flex;gap:14px;font-size:14px;color:#C6CACE}
+.meta-k{font-size:10.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--dim);width:82px;flex:none;padding-top:3px}
+.form{display:flex;flex-direction:column;gap:18px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field > span{font-size:10.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--dim)}
+.field input,.field textarea{
+  font-family:inherit;font-size:15px;color:var(--fg);background:transparent;
+  border:0;border-bottom:1px solid var(--line);padding:12px 0;border-radius:0;
+  transition:border-color .18s ease;
+}
+.field input::placeholder,.field textarea::placeholder{color:#54585C}
+.field input:focus,.field textarea:focus{outline:0;border-bottom-color:var(--amber)}
+.field textarea{resize:vertical;min-height:96px}
+.form .btn{align-self:flex-start;margin-top:6px}
+
+/* ---------- pied de page ---------- */
+.foot{border-top:1px solid var(--line-soft);background:var(--bg);padding:56px 0 40px}
+.foot-top{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+  padding-bottom:34px;border-bottom:1px solid var(--line-soft)}
+.foot-links{display:flex;gap:26px;flex-wrap:wrap;margin-left:auto}
+.foot-links a{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
+.foot-links a:hover{color:var(--fg)}
+.foot-bot{display:flex;align-items:center;gap:26px;flex-wrap:wrap;padding-top:30px}
+.foot-copy{margin-left:auto;font-size:11px;letter-spacing:0.1em;color:var(--dim)}
+
+/* ---------- bandeau cookies ---------- */
+.cookie{
+  /* Centrage par marges automatiques, et non par translateX(-50%).
+     Avec la translation, des que la largeur calculee du bandeau tombe sur
+     un nombre impair de pixels, l'element se pose sur un demi-pixel : tout
+     son texte est alors rendu flou, et les bordures fines des boutons
+     disparaissent presque. Le calage sur la grille de pixels supprime le
+     probleme a la source. */
+  position:fixed;left:0;right:0;bottom:24px;z-index:100;
+  width:min(860px,calc(100% - 48px));margin-inline:auto;
+  background:rgba(10,11,12,0.97);backdrop-filter:blur(14px);
+  border:1px solid var(--line);padding:20px 24px;
+  display:flex;align-items:center;gap:24px;
+}
+.cookie .fine{flex:1;color:#C9CFCA}
+.cookie a{color:var(--amber)}
+.cookie-actions{display:flex;gap:10px;flex:none}
+
+/* Refuser doit se voir exactement autant qu'Accepter.
+   Ce n'est pas qu'une question d'esthetique : un consentement n'est valable
+   que si le refus est aussi simple et aussi visible que l'acceptation. Un
+   bouton fantome a bordure translucide, pose a cote d'un bouton blanc plein,
+   se lit comme un lien secondaire — c'est precisement le motif que les
+   autorites de controle qualifient de trompeur.
+   Meme taille, meme largeur minimale, bordure pleine et fond legerement
+   soutenu : les deux choix se presentent a egalite. */
+.cookie-actions .btn{padding:12px 22px;font-size:11px;min-width:124px}
+.cookie-actions .btn--ghost{
+  border-color:var(--fg);color:var(--fg);background:rgba(255,255,255,0.09);
+}
+.cookie-actions .btn--ghost:hover{background:var(--fg);color:#000}
+
+/* ---------- apparition au defilement ---------- */
+.sg-js .reveal{opacity:0;transform:translateY(22px)}
+.sg-js .reveal.is-in{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
+
+/* Cascade : les enfants entrent les uns apres les autres plutot qu'en bloc.
+   Le retard est porte par l'enfant, l'animation reste declenchee par le parent. */
+.sg-js .cascade > *{opacity:0;transform:translateY(26px)}
+.sg-js .cascade.is-in > *{
+  opacity:1;transform:none;
+  transition:opacity .66s cubic-bezier(.22,.61,.36,1),transform .66s cubic-bezier(.22,.61,.36,1);
+}
+.sg-js .cascade.is-in > *:nth-child(1){transition-delay:.02s}
+.sg-js .cascade.is-in > *:nth-child(2){transition-delay:.12s}
+.sg-js .cascade.is-in > *:nth-child(3){transition-delay:.22s}
+.sg-js .cascade.is-in > *:nth-child(4){transition-delay:.32s}
+
+/* ---------- micro-interactions ---------- */
+.card,.partner{transition:transform .28s cubic-bezier(.22,.61,.36,1),background .2s ease,box-shadow .28s ease}
+.card:hover,.partner:hover{transform:translateY(-6px)}
+.sec--light .card:hover,.sec--light .partner:hover{box-shadow:0 16px 34px rgba(19,42,25,.10)}
+
+/* la fleche des boutons avance au survol */
+.btn--arrow::after{content:'→';transition:transform .25s ease}
+.btn--arrow:hover::after{transform:translateX(5px)}
+
+/* le rail de la feuille de route se trace */
+.sg-js .rail.is-in .step::before{animation:trait .7s cubic-bezier(.22,.61,.36,1) both}
+.sg-js .rail.is-in .step:nth-child(2)::before{animation-delay:.1s}
+.sg-js .rail.is-in .step:nth-child(3)::before{animation-delay:.2s}
+.sg-js .rail.is-in .step:nth-child(4)::before{animation-delay:.3s}
+@keyframes trait{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.step::before{transform-origin:left center}
+/* la pastille du jalon pulse doucement */
+.step--on::after{box-shadow:0 0 0 0 var(--green);animation:pouls 3.2s ease-out infinite}
+@keyframes pouls{0%{box-shadow:0 0 0 0 rgba(140,198,63,.5)}70%,100%{box-shadow:0 0 0 12px rgba(140,198,63,0)}}
+
+/* halo vert lent dans les sections sombres : la page respire */
+.sec--panel::before,.foot::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(50% 55% at 18% 0%,rgba(140,198,63,0.10),transparent 62%),
+             radial-gradient(45% 50% at 88% 100%,rgba(253,176,34,0.07),transparent 60%);
+  animation:respire 16s ease-in-out infinite alternate;
+}
+.sec--panel,.foot{position:relative}
+.sec--panel > *,.foot > *{position:relative;z-index:1}
+@keyframes respire{from{opacity:.55;transform:scale(1)}to{opacity:1;transform:scale(1.12)}}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .sg-js .reveal,.sg-js .cascade > *{opacity:1;transform:none}
+  .scroll-cue,.stats::after,.sec--panel::before,.foot::before,.step--on::after{animation:none}
+  .sg-js .rail.is-in .step::before{animation:none}
+  .card:hover,.partner:hover,.etape:hover .etape-img img{transform:none}
+}
+
+/* ===================================================================
+   RESPONSIVE
+   =================================================================== */
+
+@media (max-width:1180px){
+  :root{--gut:32px}
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .rail{grid-template-columns:repeat(2,1fr);row-gap:40px}
+  .contact-grid{gap:48px}
+}
+
+@media (max-width:900px){
+  .nav-links{display:none}
+  .grid-3{grid-template-columns:1fr}
+}
+
+@media (max-width:820px){
+  /* Carrousels : empilees, ces cartes prenaient un ecran chacune.
+     La carte suivante depasse : c'est ce qui signale qu'on peut glisser. */
+  .slider{
+    display:flex;gap:14px;background:none;
+    margin:0 calc(var(--gut) * -1);padding:0 var(--gut) 14px;
+    /* overflow-y explicite : sans lui il vaut 'auto' des que overflow-x ne vaut
+       plus 'visible', et le carrousel devient aussi un conteneur de defilement
+       vertical qui avale le geste au lieu de le laisser a la page. */
+    overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory;scroll-padding-left:var(--gut);
+    scrollbar-width:none;
+  }
+  .slider::-webkit-scrollbar{display:none}
+  .slider > *{flex:0 0 min(80%,340px);scroll-snap-align:start}
+  .slider .card,.slider .partner{border:1px solid var(--line-soft)}
+
+  /* Tableau : defilement horizontal, colonne SunyGreen ramenee en 2e
+     position pour qu'elle soit lisible sans faire glisser. */
+  .cmp-scroll{overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:none}
+  .cmp-scroll::-webkit-scrollbar{display:none}
+  .cmp{min-width:620px}
+  .cmp .col-us{order:0}
+  .cmp-hint{display:block}
+}
+
+@media (max-width:760px){
+  :root{--gut:20px;--nav:58px}
+  .menu{left:0;right:0;width:auto;border-left:0;border-right:0}
+  .sec{padding:76px 0}
+  .sec-head{margin-bottom:40px}
+
+  /* Le texte reste sur la photo, comme sur grand ecran et comme sur les
+     sites de reference. Ce qui rend ce choix tenable : object-position
+     garde le sujet dans le cadre, et le voile passe en degrade vertical
+     soutenu puisque le texte occupe desormais toute la largeur. */
+  .hero-inner{padding-bottom:64px;padding-top:0}
+  .hero-scrim{
+    background:linear-gradient(0deg,#000 0%,rgba(0,0,0,0.90) 22%,rgba(0,0,0,0.55) 50%,rgba(0,0,0,0.12) 100%);
+  }
+  .hero .lead{margin-bottom:26px}
+  .scroll-cue{display:none}
+
+  /* Les trois chiffres restent cote a cote : empiles, ils perdaient leur
+     effet de comparaison. La typo est reduite pour que « 800 m+ » tienne
+     dans un tiers de l'ecran sans se couper. */
+  .stats-grid{grid-template-columns:repeat(3,1fr)}
+  .stat{padding:28px 0}
+  .stats .stat-k{font-size:9px;letter-spacing:0.1em;margin-bottom:7px}
+  .stats .stat-v{font-size:21px;letter-spacing:-0.02em}
+  .stats .stat-u{font-size:11px;line-height:1.35;margin-top:6px}
+  .stat-k,.stat-v,.stat-u{padding-left:14px}
+  .stat:first-child .stat-k,.stat:first-child .stat-v,.stat:first-child .stat-u{padding-left:0}
+
+  .tabs{margin-bottom:32px}
+  .tab{flex:1;padding:12px 10px;font-size:10.5px;letter-spacing:0.1em}
+
+  .contact-grid{grid-template-columns:1fr;gap:44px}
+  .form-row{grid-template-columns:1fr}
+  /* 16px minimum : en dessous, iOS zoome a la saisie */
+  .field input,.field textarea{font-size:16px}
+
+  .foot-links{margin-left:0;gap:14px 20px}
+  .foot-copy{margin-left:0}
+
+  .cookie{left:12px;right:12px;bottom:12px;transform:none;width:auto;
+    flex-direction:column;align-items:stretch;gap:14px;padding:18px}
+  .cookie-actions .btn{flex:1}
+}
+
+@media (max-width:440px){
+  :root{--gut:16px}
+  /* un tiers de 288px : on resserre encore pour garder les trois de front */
+  .stats .stat-v{font-size:18px}
+  .stats .stat-k{font-size:8.5px;letter-spacing:0.06em}
+  .stats .stat-u{font-size:10px}
+  .stat-k,.stat-v,.stat-u{padding-left:10px}
+  .lang{display:none}
+  .hero .btn-row .btn{width:100%}
+  .cmp{min-width:560px}
+}
+
+/* ===================================================================
+   AJOUTS DE MISE EN PRODUCTION
+   Lien d'evitement, formulaire reel, pages legales. Meme vocabulaire
+   graphique que ci-dessus : rien de neuf, seulement ce qui manquait a
+   la maquette pour devenir un site.
+   =================================================================== */
+
+/* ---------- accessibilite ----------
+   Le lien d'evitement est le premier element focalisable : au clavier, une
+   seule tabulation saute la navigation et atteint le contenu. */
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:200;
+  background:var(--amber);color:#000;padding:12px 20px;
+  font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+}
+.skip:focus{left:12px;top:12px}
+
+/* Le contour de focus est retire sur les champs (remplace par un soulignement
+   colore), il doit donc rester visible partout ailleurs. */
+a:focus-visible,button:focus-visible,input[type=checkbox]:focus-visible{
+  outline:2px solid var(--amber);outline-offset:3px;border-radius:2px;
+}
+.sec--light a:focus-visible,.sec--light button:focus-visible,
+.sec--light input[type=checkbox]:focus-visible{outline-color:var(--green-deep)}
+
+.menu-lang{border-top:1px solid var(--line);margin-top:8px}
+
+/* ---------- formulaire de contact ---------- */
+/* Piege a robots : masque a l'oeil comme au lecteur d'ecran, mais rempli par
+   les scripts d'envoi automatique. Web3Forms rejette le message s'il est coche. */
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+
+.consent{display:flex;align-items:flex-start;gap:11px;cursor:pointer;
+  font-size:12.5px;line-height:1.55;color:var(--muted)}
+.consent input{margin:2px 0 0;width:16px;height:16px;flex:none;accent-color:var(--amber)}
+.sec--light .consent{color:var(--ink-soft)}
+.sec--light .consent input{accent-color:var(--green-deep)}
+
+/* Compte rendu d'envoi : vide tant que rien n'a ete tente, donc invisible. */
+.form-etat{margin:0;font-size:13.5px;line-height:1.55}
+.form-etat:empty{display:none}
+.form-etat.is-ok{color:var(--green-deep)}
+.form-etat.is-ko{color:#B4341F}
+
+/* ---------- pages legales ----------
+   Pages de texte long : une seule colonne etroite, car au-dela de ~70
+   caracteres par ligne l'oeil perd le debut de la ligne suivante. */
+.nav--solid{background:rgba(0,0,0,0.9);backdrop-filter:blur(14px);
+  border-bottom-color:var(--line-soft)}
+
+.doc{
+  background:
+    radial-gradient(120% 60% at 100% 0%, rgba(140,198,63,0.14), transparent 60%),
+    var(--cream);
+  color:var(--ink);padding:72px 0 96px;
+}
+.doc-wrap{width:100%;max-width:760px;margin:0 auto;padding:0 var(--gut)}
+.doc h1{font-size:clamp(28px,5vw,52px);line-height:1.03;color:var(--ink)}
+.doc .eyebrow{color:var(--green-deep)}
+.doc-maj{margin:20px 0 0;font-size:12.5px;color:var(--ink-dim)}
+.doc h2{
+  font-size:clamp(19px,2.4vw,26px);color:var(--ink);
+  margin:56px 0 18px;padding-top:26px;border-top:1px solid var(--line-ink);
+}
+.doc h3{font-size:16px;color:var(--ink);margin:30px 0 10px;text-transform:none;letter-spacing:normal}
+.doc p,.doc li{font-size:15px;line-height:1.72;color:var(--ink-soft);margin:0 0 15px}
+.doc ul{margin:0 0 15px;padding-left:20px}
+.doc li{margin-bottom:9px}
+.doc a{color:var(--green-deep);text-decoration:underline;text-underline-offset:3px}
+.doc a:hover{color:var(--ink)}
+.doc strong{color:var(--ink);font-weight:600}
+.doc code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:0.88em;background:var(--cream-2);color:var(--ink);
+  padding:2px 6px;border-radius:3px;
+}
+
+.doc-table{width:100%;border-collapse:collapse;font-size:14px;margin:0 0 22px}
+.doc-table th,.doc-table td{
+  text-align:left;padding:13px 14px;border-bottom:1px solid var(--line-ink);
+  vertical-align:top;color:var(--ink-soft);
+}
+.doc-table th{
+  font-size:10.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--ink-dim);width:34%;
+}
+.doc-table tr:last-child th,.doc-table tr:last-child td{border-bottom:0}
+
+/* Champs restant a renseigner avant la mise en ligne. Volontairement voyants :
+   s'il en subsiste un le jour de la publication, il doit sauter aux yeux. */
+.todo{
+  background:#FFE9B0;color:#6B4A00;font-weight:600;
+  padding:2px 7px;border-radius:3px;box-decoration-break:clone;
+}
+.doc-alerte{
+  background:#FFF4D6;border-left:3px solid var(--amber);
+  padding:18px 22px;margin:0 0 26px;border-radius:0 4px 4px 0;
+}
+.doc-alerte p{margin:0;font-size:13.5px;color:#6B4A00}
+
+@media (max-width:900px){
+  .doc{padding:52px 0 72px}
+  .doc h2{margin-top:42px}
+  .doc-table th{width:auto}
+  /* Un tableau a deux colonnes ne tient pas sous 560 px : on l'empile. */
+  .doc-table,.doc-table tbody,.doc-table tr,.doc-table th,.doc-table td{display:block;width:auto}
+  .doc-table th{border-bottom:0;padding-bottom:4px}
+  .doc-table td{padding-top:0;padding-bottom:16px}
+}
+
+/* ---------- page 404 ---------- */
+.err{min-height:calc(100vh - var(--nav));min-height:calc(100svh - var(--nav));
+  display:flex;align-items:center;background:var(--bg);padding:64px 0}
+.err h1{font-size:clamp(56px,14vw,140px);line-height:0.9;color:var(--fg)}
+.err .lead{margin-top:20px;max-width:520px}
+.err .btn-row{margin-top:34px}
+
+/* ===================================================================
+   RYTHME ET HIERARCHIE
+
+   Le probleme n'etait pas la direction artistique, qui tient, mais sa
+   regularite : onze sections a la meme respiration, sept blocs de contenu
+   en grilles a colonnes egales, et une seconde moitie de page entierement
+   creme sur quatre sections consecutives. L'oeil n'avait plus aucun point
+   d'accroche et le defilement devenait un diaporama de diapositives
+   identiques.
+
+   Ce bloc ne change ni les couleurs, ni les textes, ni les composants. Il
+   ne joue que sur trois leviers : ou l'on respire, ou l'on rompt la grille,
+   et ce qui doit dominer dans chaque section.
+   =================================================================== */
+
+/* ---------- respirations differenciees ----------
+   Une section dense n'a pas besoin du meme air qu'une section de
+   conclusion. Un rythme unique de 120px les traitait a l'identique. */
+.sec--tight{padding:88px 0}
+.sec--wide{padding:152px 0}
+
+/* Second ton de creme. Deux sections claires se suivent encore une fois
+   dans la page ; sans marche tonale, elles se lisent comme une seule
+   section interminable. Le degrade part d'un autre angle, ce qui suffit a
+   distinguer les deux plages sans introduire de couleur nouvelle. */
+.sec--light-alt{
+  background:
+    radial-gradient(105% 70% at 0% 0%, rgba(140,198,63,0.15), transparent 56%),
+    var(--cream-2);
+}
+
+/* ---------- bandeau de chiffres : une valeur domine ----------
+   « 800 m+ » est l'argument qui differencie le produit ; « 2 min » est un
+   confort. Les afficher a la meme taille revenait a dire qu'ils pesent
+   pareil. La premiere colonne prend donc la place et la couleur de marque,
+   les deux autres deviennent ses satellites.
+   C'est aussi le seul endroit ou l'ambre retrouve un vrai role : jusqu'ici
+   il ne subsistait que dans les sur-titres. */
+@media (min-width:901px){
+  .stats-grid{grid-template-columns:1.75fr 1fr 1fr}
+  .stat{display:flex;flex-direction:column;justify-content:center}
+  .stat:first-child{padding:56px 0}
+  .stat:first-child .stat-k{font-size:12px;letter-spacing:0.22em;color:var(--muted)}
+  .stat:first-child .stat-v{
+    font-size:clamp(56px,8.4vw,108px);line-height:0.88;color:var(--amber);
+    letter-spacing:-0.045em;margin:4px 0 2px;
+  }
+  .stat:first-child .stat-u{font-size:15px;color:#C6CACE}
+}
+
+/* ---------- feuille de route : une progression, pas un tableau ----------
+   Quatre colonnes egales et des pastilles de 8px se lisaient comme un
+   tableau. Le rail s'epaissit, les pastilles doublent de taille et sont
+   cerclees du fond de la section : elles percent la ligne au lieu d'etre
+   posees a cote. Les deux jalons vifs — le depart TRL 5 et l'objectif
+   TRL 7 — ressortent alors comme les bornes d'un parcours. */
+.rail .step::before{height:2px;background:var(--line)}
+.rail .step::after{
+  top:-8px;width:12px;height:12px;
+  border:3px solid var(--panel);background:var(--dim);
+  box-sizing:content-box;
+}
+.rail .step--on::after{background:var(--green)}
+.rail .step--on .step-k{color:var(--green)}
+/* Le halo du jalon doit partir du bord de la pastille, pas de son centre. */
+@keyframes pouls{0%{box-shadow:0 0 0 0 rgba(140,198,63,.45)}70%,100%{box-shadow:0 0 0 14px rgba(140,198,63,0)}}
+
+/* ---------- comparatif : la colonne qui porte l'argument ----------
+   C'est le contenu le plus persuasif de la page. Une teinte a 7% ne
+   suffisait pas a le designer. La colonne devient un bloc continu, borde
+   sur ses deux cotes et coiffe d'un filet vert : on la lit comme une
+   reponse, pas comme une case de plus. */
+.cmp .col-us{
+  background:rgba(140,198,63,0.12);
+  box-shadow:inset 1px 0 0 rgba(140,198,63,0.28),inset -1px 0 0 rgba(140,198,63,0.28);
+}
+.cmp thead .col-us{
+  box-shadow:inset 1px 0 0 rgba(140,198,63,0.28),inset -1px 0 0 rgba(140,198,63,0.28),
+             inset 0 3px 0 0 var(--green);
+  color:var(--green);
+}
+.cmp tbody tr:last-child .col-us{
+  box-shadow:inset 1px 0 0 rgba(140,198,63,0.28),inset -1px 0 0 rgba(140,198,63,0.28),
+             inset 0 -1px 0 0 rgba(140,198,63,0.28);
+}
+
+/* ---------- formulaire sur fond sombre ----------
+   La section Contact est passee en sombre pour rompre la plage creme. Deux
+   details ne suivaient pas automatiquement. */
+/* Le vert profond est calibre pour le creme : sur fond sombre il tombe a
+   2:1 et le message de confirmation devenait illisible. */
+.sec--panel .form-etat.is-ok{color:var(--green)}
+.sec--panel .form-etat.is-ko{color:#FF8A73}
+
+/* Un lien dans une mention legale heritait de la couleur du texte et n'avait
+   pas de soulignement : rien ne le distinguait d'un mot ordinaire. */
+.fine a,.consent a{text-decoration:underline;text-underline-offset:2px;color:var(--amber)}
+.fine a:hover,.consent a:hover{color:var(--fg)}
+.sec--light .fine a,.sec--light .consent a{color:var(--green-deep)}
+.sec--light .fine a:hover,.sec--light .consent a:hover{color:var(--ink)}
+
+/* ---------- navigation : le lien survole se souligne ----------
+   Un simple eclaircissement du gris ne se remarque pas sur une photo. */
+.nav-links a{position:relative;padding-bottom:3px}
+.nav-links a::after{
+  content:'';position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--amber);transform:scaleX(0);transform-origin:left center;
+  transition:transform .24s cubic-bezier(.22,.61,.36,1);
+}
+.nav-links a:hover::after{transform:scaleX(1)}
+
+@media (prefers-reduced-motion:reduce){
+  .nav-links a::after{transition:none}
+}
+
+/* ---------- reprises responsives ----------
+   Les ruptures de grille ci-dessus sont reservees au grand ecran : empilees,
+   elles n'ont plus d'objet. Les regles existantes reprennent la main. */
+@media (max-width:900px){
+  .sec--tight{padding:88px 0}
+  .sec--wide{padding:120px 0}
+}
+@media (max-width:760px){
+  .sec--tight,.sec--wide{padding:76px 0}
+}
+
+/* ===================================================================
+   BARRE DE NAVIGATION
+
+   Trois corrections, dont deux qui n'etaient pas des questions de gout :
+
+   1. Le bouton burger n'etait masque nulle part. Sur ordinateur, on voyait
+      donc les quatre liens de navigation ET un burger ouvrant un menu
+      contenant ces memes quatre liens.
+   2. « Nous contacter » n'existait que dans ce menu burger, donc invisible
+      sur ordinateur — sur un site dont l'objet est precisement d'etre
+      contacte par des evaluateurs et des industriels.
+   3. Le selecteur de langue etait l'element le plus contraste de la barre :
+      un pave blanc plein, plus lourd que le logo lui-meme. L'oeil allait au
+      choix de langue avant d'aller a la marque.
+   =================================================================== */
+
+/* ---------- le burger redevient un element mobile ---------- */
+@media (min-width:901px){
+  .burger{display:none}
+}
+
+/* ---------- bouton d'action de la barre ---------- */
+.nav-cta{padding:11px 22px;font-size:10.5px;letter-spacing:0.13em}
+@media (max-width:900px){
+  /* Sous 900px le burger prend le relais : le menu contient deja ce lien. */
+  .nav-cta{display:none}
+}
+
+/* ===================================================================
+   SELECTEUR DE LANGUE
+
+   Liste deroulante : la langue courante est affichee, un clic ouvre le
+   choix. Chaque page pointe vers SA traduction — on ne perd pas sa place
+   en changeant de langue.
+
+   Les drapeaux sont dessines en SVG, encodes en data: URI dans cette
+   feuille. Trois raisons a ce choix plutot qu'un emoji ou un fichier :
+     — Windows n'affiche pas les emoji drapeaux, il les remplace par les
+       deux lettres du pays (« FR », « GB ») ;
+     — aucune requete reseau supplementaire, et rien a televerser ;
+     — definis une seule fois ici, ils servent les huit pages.
+
+   ⚠ Un drapeau designe un pays, pas une langue. Le consortium est belge
+     (BLINQY a Charleroi, DHF a Ovifat) : le tricolore francais attribue
+     implicitement le projet a la France. Pour revenir a un selecteur sans
+     drapeau, il suffit de passer .lang-drapeau en display:none — le reste
+     de la mise en page tient sans eux.
+   =================================================================== */
+
+.lang{position:relative}
+
+.lang-btn{
+  display:flex;align-items:center;gap:9px;
+  padding:8px 11px;background:none;cursor:pointer;
+  border:1px solid rgba(255,255,255,0.18);border-radius:3px;
+  font-family:inherit;font-size:11px;font-weight:700;letter-spacing:0.12em;
+  color:var(--fg);
+  transition:border-color .18s ease,background .18s ease;
+}
+.lang-btn:hover{border-color:rgba(255,255,255,0.42);background:rgba(255,255,255,0.06)}
+.lang-btn[aria-expanded="true"]{border-color:var(--amber);background:rgba(255,255,255,0.07)}
+
+/* Chevron trace au trait : deux bords d'un carre pivote a 45°. */
+.lang-chevron{
+  width:6px;height:6px;flex:none;margin:-3px 0 0 1px;
+  border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:rotate(45deg);transition:transform .22s ease;
+}
+.lang-btn[aria-expanded="true"] .lang-chevron{transform:rotate(-135deg);margin-top:2px}
+
+.lang-liste{
+  position:absolute;top:calc(100% + 10px);right:0;z-index:80;
+  min-width:186px;margin:0;padding:6px;list-style:none;
+  background:rgba(10,12,11,0.97);backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:4px;
+  box-shadow:0 18px 42px rgba(0,0,0,.5);
+  animation:langOuvre .18s cubic-bezier(.22,.61,.36,1);
+}
+@keyframes langOuvre{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+.lang-opt{
+  display:flex;align-items:center;gap:11px;
+  padding:11px 12px;border-radius:3px;
+  font-size:13px;font-weight:500;letter-spacing:0;color:#C6CACE;
+  transition:background .15s ease,color .15s ease;
+}
+a.lang-opt:hover{background:rgba(255,255,255,0.08);color:var(--fg)}
+/* La langue courante reste visible dans la liste, mais n'est pas cliquable :
+   elle sert de reperage, pas de choix. */
+.lang-opt.is-on{color:var(--fg);font-weight:600;cursor:default}
+.lang-opt.is-on::after{
+  content:'';margin-left:auto;width:5px;height:9px;flex:none;
+  border-right:1.5px solid var(--amber);border-bottom:1.5px solid var(--amber);
+  transform:rotate(45deg) translate(-1px,-1px);
+}
+
+/* ---------- drapeaux ---------- */
+.lang-drapeau{
+  width:19px;height:13px;flex:none;border-radius:1.5px;
+  background-size:cover;background-position:center;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.22);
+}
+/* Tricolore : trois bandes verticales. */
+.lang-drapeau--fr{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='1' height='2' fill='%23002395'/%3E%3Crect x='1' width='1' height='2' fill='%23ffffff'/%3E%3Crect x='2' width='1' height='2' fill='%23ED2939'/%3E%3C/svg%3E");
+}
+/* Union Jack simplifie : a 19px, la contre-echange des diagonales rouges
+   n'est pas perceptible, on l'omet au profit d'un fichier trois fois plus
+   court. */
+.lang-drapeau--gb{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30'%3E%3Crect width='60' height='30' fill='%23012169'/%3E%3Cpath d='M0 0 L60 30 M60 0 L0 30' stroke='%23ffffff' stroke-width='6'/%3E%3Cpath d='M0 0 L60 30 M60 0 L0 30' stroke='%23C8102E' stroke-width='3'/%3E%3Cpath d='M30 0 V30 M0 15 H60' stroke='%23ffffff' stroke-width='10'/%3E%3Cpath d='M30 0 V30 M0 15 H60' stroke='%23C8102E' stroke-width='6'/%3E%3C/svg%3E");
+}
+
+/* ---------- sur fond clair ----------
+   Les pages legales ont une barre sombre opaque (.nav--solid), le selecteur
+   n'a donc pas besoin de variante claire. Cette regle ne sert qu'au menu
+   mobile, ou l'option de langue est posee sur le fond du menu. */
+.menu-lang{display:flex;align-items:center;gap:10px}
+.menu-lang::before{
+  content:'';width:19px;height:13px;flex:none;border-radius:1.5px;
+  background-size:cover;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.22);
+}
+html[lang="fr"] .menu-lang::before{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30'%3E%3Crect width='60' height='30' fill='%23012169'/%3E%3Cpath d='M0 0 L60 30 M60 0 L0 30' stroke='%23ffffff' stroke-width='6'/%3E%3Cpath d='M0 0 L60 30 M60 0 L0 30' stroke='%23C8102E' stroke-width='3'/%3E%3Cpath d='M30 0 V30 M0 15 H60' stroke='%23ffffff' stroke-width='10'/%3E%3Cpath d='M30 0 V30 M0 15 H60' stroke='%23C8102E' stroke-width='6'/%3E%3C/svg%3E");
+}
+html[lang="en"] .menu-lang::before{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='1' height='2' fill='%23002395'/%3E%3Crect x='1' width='1' height='2' fill='%23ffffff'/%3E%3Crect x='2' width='1' height='2' fill='%23ED2939'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion:reduce){
+  .lang-liste{animation:none}
+  .lang-chevron{transition:none}
+}
+
+/* ===================================================================
+   BARRE FLOTTANTE
+
+   La barre se detache des bords : elle devient un objet pose sur la page
+   plutot qu'un bandeau colle au cadre de la fenetre.
+
+   Elle est materialisee en permanence, et non transparente en haut de page
+   comme auparavant. Ce n'est pas un choix esthetique mais une contrainte de
+   lisibilite : le voile du hero est un degrade horizontal (90% d'opacite a
+   gauche, 5% a droite) et object-position place le sujet de la photo dans le
+   tiers droit. Une barre transparente poserait donc le selecteur de langue
+   et le bouton d'action sur la zone la plus claire de l'image, sans aucun
+   voile pour les soutenir.
+
+   Contrepartie gagnee au passage : la barre ne prend plus de place dans le
+   flux, le hero recupere les 72px qu'il perdait et devient reellement plein
+   ecran, au lieu de commencer sous une bande noire.
+   =================================================================== */
+
+.nav{
+  position:fixed;top:14px;left:0;right:0;
+  width:min(var(--wrap), calc(100% - 2 * var(--gut)));
+  margin:0 auto;
+  height:var(--nav);padding:0 24px;
+  border-radius:10px;
+  /* Le verre : une teinte sombre tres transparente, et c'est le flou qui
+     fait le travail. Sans saturation, ce qui passe au travers vire au gris. */
+  background:rgba(9,12,10,0.58);
+  backdrop-filter:blur(20px) saturate(155%);
+  -webkit-backdrop-filter:blur(20px) saturate(155%);
+  border:1px solid rgba(255,255,255,0.11);
+  box-shadow:0 10px 30px rgba(0,0,0,0.30);
+  transition:background .28s ease,border-color .28s ease,box-shadow .28s ease;
+}
+
+/* Au defilement, la barre se pose franchement : elle passe devant du
+   contenu au lieu de flotter au-dessus d'une photo, il lui faut plus de
+   corps et une ombre portee plus marquee. */
+.nav.is-stuck{
+  background:rgba(7,9,8,0.80);
+  border-color:rgba(255,255,255,0.16);
+  box-shadow:0 16px 44px rgba(0,0,0,0.46);
+}
+
+/* Les pages sans photo n'ont rien a laisser transparaitre : la barre y est
+   plus dense, pour ne pas laisser le texte defiler visiblement au travers. */
+.nav--solid{background:rgba(7,9,8,0.86)}
+.nav--solid.is-stuck{background:rgba(6,8,7,0.92)}
+
+/* Le menu deroulant s'aligne desormais sur le bord de la barre, et non sur
+   la gouttiere de la page : la barre est en retrait, la gouttiere ne veut
+   plus rien dire ici. */
+.menu{top:calc(100% + 10px);right:0;border-top:1px solid var(--line);border-radius:8px}
+
+/* La barre etant sortie du flux, elle ne pousse plus rien vers le bas.
+   Le hero passe donc en pleine hauteur et la photo commence tout en haut. */
+.hero{min-height:100vh;min-height:100svh}
+
+/* Les pages qui n'ont pas de photo plein cadre doivent en revanche degager
+   la hauteur de la barre, sans quoi leur premier titre defilerait dessous. */
+.doc{padding-top:calc(var(--nav) + 86px)}
+.err{min-height:100vh;min-height:100svh;padding-top:calc(var(--nav) + 40px)}
+
+/* Une ancre doit s'arreter sous la barre, pas derriere elle. Le retrait
+   superieur de 14px et une marge de confort s'ajoutent a sa hauteur. */
+section[id],header[id],footer[id]{scroll-margin-top:calc(var(--nav) + 30px)}
+
+@media (max-width:900px){
+  .nav{padding:0 18px;border-radius:9px}
+  .doc{padding-top:calc(var(--nav) + 66px)}
+}
+
+@media (max-width:760px){
+  /* Sur telephone, 14px de retrait de chaque cote suffisent : la gouttiere
+     de 20px laisserait la barre trop etroite pour le logo et le burger. */
+  .nav{top:10px;width:calc(100% - 24px);padding:0 14px;border-radius:8px}
+  .menu{left:0;right:0;width:auto;border:1px solid var(--line);border-radius:8px}
+  .doc{padding-top:calc(var(--nav) + 46px)}
+}
+
+/* Le flou en arriere-plan est couteux sur les machines modestes, et sans
+   lui la barre deviendrait illisible sur la photo : on compense par un fond
+   franchement opaque. */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .nav{background:rgba(7,9,8,0.94)}
+  .nav.is-stuck{background:rgba(5,7,6,0.97)}
+}
+
+/* ===================================================================
+   MOTIFS DE FOND
+
+   Deux motifs, et deux seulement. Un motif qu'on remarque est un motif qui
+   entre en concurrence avec les photos : ils sont donc poses a la limite du
+   perceptible — entre 3% et 7% d'opacite. On ne doit pas les voir, on doit
+   sentir que la surface n'est pas vide.
+
+   Chacun a une raison d'etre la, ce n'est pas de la texture decorative :
+
+     .sec--ondes  ondes concentriques, la ou il est question de portee et de
+                  signal — le bandeau « 800 m+ » et la section Contact. Les
+                  anneaux emanent de la gauche, du chiffre lui-meme.
+     .sec--trame  grille technique, la ou il est question de donnees et de
+                  structure — le tableau comparatif et le planning de la
+                  feuille de route.
+
+   Rien sur les sections creme : elles sont la respiration de la page. La
+   regle est « sombre = technique = texture, creme = editorial = net », et
+   c'est ce contraste qui fait lire les sections sombres comme techniques.
+
+   Tout est trace par des degrades CSS : aucun fichier image, aucune requete
+   supplementaire, et rien a televerser. Les motifs sont statiques — ils sont
+   peints une fois, contrairement aux halos qui, eux, sont animes.
+   =================================================================== */
+
+.sec--trame::after,.sec--ondes::after{
+  content:'';position:absolute;inset:0;
+  pointer-events:none;z-index:0;
+}
+
+/* ---------- grille technique ----------
+   Mailles de 64px, filets de 1px. Le masque l'estompe vers le bas : sans
+   lui, la grille s'arreterait net au bord de la section et se lirait comme
+   un papier peint decoupe plutot que comme une trame de fond. */
+.sec--trame::after{
+  background-image:
+    repeating-linear-gradient(0deg,  rgba(255,255,255,0.032) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.032) 0 1px, transparent 1px 64px);
+  -webkit-mask-image:radial-gradient(125% 100% at 50% 0%, #000 28%, transparent 82%);
+          mask-image:radial-gradient(125% 100% at 50% 0%, #000 28%, transparent 82%);
+}
+
+/* ---------- ondes concentriques ----------
+   Un anneau tous les 76px, emis depuis le tiers gauche — la ou se trouve
+   « 800 m+ » dans le bandeau, et le titre dans la section Contact. Le
+   masque les eteint vers la droite : une onde qui s'attenue avec la
+   distance, ce qui est precisement le propos. */
+.sec--ondes::after{
+  background-image:repeating-radial-gradient(circle at 13% 50%,
+    rgba(140,198,63,0.075) 0 1px, transparent 1px 76px);
+  -webkit-mask-image:linear-gradient(90deg, #000 0%, rgba(0,0,0,0.5) 46%, transparent 84%);
+          mask-image:linear-gradient(90deg, #000 0%, rgba(0,0,0,0.5) 46%, transparent 84%);
+}
+
+/* ---------- bandeau de chiffres ----------
+   Meme motif d'ondes, pose ici directement : ::after y sert deja au halo
+   vert derivant, on utilise donc ::before. Les anneaux partent du chiffre
+   dominant et disent la meme chose que lui — une portee qui rayonne. */
+.stats::before{
+  content:'';position:absolute;inset:0;
+  pointer-events:none;z-index:0;
+  background-image:repeating-radial-gradient(circle at 11% 50%,
+    rgba(140,198,63,0.085) 0 1px, transparent 1px 82px);
+  -webkit-mask-image:linear-gradient(90deg, #000 0%, rgba(0,0,0,0.45) 42%, transparent 80%);
+          mask-image:linear-gradient(90deg, #000 0%, rgba(0,0,0,0.45) 42%, transparent 80%);
+}
+
+@media (max-width:760px){
+  /* Une maille de 64px ne laisse que cinq colonnes sur un telephone : la
+     grille cesse d'etre une trame pour devenir un quadrillage visible. */
+  .sec--trame::after{
+    background-image:
+      repeating-linear-gradient(0deg,  rgba(255,255,255,0.03) 0 1px, transparent 1px 42px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 42px);
+  }
+  /* Les ondes sont emises depuis la gauche : sur un ecran etroit, on les
+     resserre pour qu'il en reste plus d'une a l'ecran. */
+  .sec--ondes::after{
+    background-image:repeating-radial-gradient(circle at 8% 50%,
+      rgba(140,198,63,0.07) 0 1px, transparent 1px 52px);
+  }
+  .stats::before{
+    background-image:repeating-radial-gradient(circle at 6% 50%,
+      rgba(140,198,63,0.08) 0 1px, transparent 1px 56px);
+  }
+}
+
+/* ===================================================================
+   APPORTS DU DOCUMENT « TEXTE SITE WEB »
+
+   Deux dispositions nouvelles, pour deux contenus que le site n'avait pas :
+   la chaine energetique en quatre etapes, et l'impact range en quatre
+   domaines mesurables.
+   =================================================================== */
+
+/* ---------- impact : quatre domaines ----------
+   Le document range les benefices par Personnes, Exploitation,
+   Environnement et Economie. Trois points chacun, soit douze benefices
+   concrets la ou le site n'avait que trois paragraphes generaux. */
+.grid-4-open{display:grid;grid-template-columns:repeat(4,1fr);gap:36px}
+.grid-4-open .impact{border-top:2px solid var(--line);padding-top:24px}
+.grid-4-open .card-list{margin:16px 0 0}
+.grid-4-open h3{font-size:17px}
+
+@media (max-width:1180px){
+  .grid-4-open{grid-template-columns:repeat(2,1fr);gap:40px}
+}
+@media (max-width:620px){
+  .grid-4-open{grid-template-columns:1fr;gap:32px}
+}
+
+/* ---------- impact : retour a trois colonnes ----------
+   La section reprend sa disposition d'origine. Ses regles avaient ete
+   retirees quand elle etait passee a quatre colonnes ; elles reviennent
+   telles quelles, y compris la rupture de grille sur grand ecran.
+
+   Trois colonnes identiques donneraient trois arguments de poids egal. Or
+   le benefice environnemental est celui qui porte le projet — c'est le sens
+   meme d'un dispositif sans pile. Il occupe donc plus de place et parle
+   plus fort ; les deux autres le completent. */
+.grid-3-open{display:grid;grid-template-columns:repeat(3,1fr);gap:44px}
+
+@media (min-width:901px){
+  .grid-3-open{grid-template-columns:1.55fr 1fr 1fr;gap:52px;align-items:start}
+  .grid-3-open > :first-child{border-top-width:3px}
+  .grid-3-open > :first-child h3{font-size:25px;letter-spacing:-0.02em;margin-bottom:16px}
+  .grid-3-open > :first-child .body{font-size:16px;line-height:1.66}
+}
+
+@media (max-width:900px){
+  .grid-3-open{grid-template-columns:1fr;gap:34px}
+}
+
+/* ---------- logo : reprises responsives ----------
+   La barre se resserre a 58 px sous 760 px de large : un logo de 46 px n'y
+   laisserait que six pixels de reserve. On le reduit a mesure, sans jamais
+   descendre sous une taille ou la baseline devient une trainee grise. */
+@media (max-width:900px){
+  .brand img{height:40px}
+  .foot .brand img{height:52px}
+}
+@media (max-width:760px){
+  .brand img{height:34px}
+  .foot .brand img{height:46px}
+}
+@media (max-width:440px){
+  .brand img{height:30px}
+  .foot .brand img{height:40px}
+}
+
+/* ---------- premier ecran : rendre la photo au premier plan ----------
+   Le titre montait a 86 px et l'accroche tenait sur 520 px de large : le
+   bloc de texte occupait presque toute la hauteur utile, et la photo se
+   reduisait a un fond sombre. Trois reglages, aucun changement de mise en
+   page.
+
+   1. Le titre descend a 60 px au maximum. Il reste le plus gros element de
+      la page — le h2 des sections plafonne a 56 px — mais il cesse de la
+      remplir.
+   2. L'accroche s'elargit a 620 px. Contre-intuitif, mais une colonne plus
+      large tient sur moins de lignes : le bloc gagne en hauteur ce qu'il
+      perd en etroitesse.
+   3. Le voile s'eclaircit. Il passait a 90 % d'opacite a gauche, ce qui
+      effacait ce quart de l'image ; 82 % suffisent a porter du texte blanc,
+      et le degrade s'eteint plus tot vers la droite. */
+.hero h1{font-size:clamp(29px,4.6vw,60px);line-height:1.03;margin-bottom:18px}
+.hero-copy{max-width:860px}
+.hero .lead{max-width:620px;margin-bottom:30px}
+.hero-inner{padding-bottom:88px}
+.hero-scrim{
+  background:linear-gradient(90deg,rgba(0,0,0,0.82) 0%,rgba(0,0,0,0.46) 38%,rgba(0,0,0,0.03) 88%),
+             linear-gradient(0deg,var(--bg) 0%,rgba(7,10,8,0.30) 30%,transparent 58%);
+}
+
+@media (max-width:760px){
+  .hero h1{font-size:clamp(28px,7.4vw,40px)}
+  .hero .lead{max-width:none}
+  .hero-inner{padding-bottom:60px}
+  /* Le voile ci-dessus est declare plus bas dans la feuille que la regle
+     mobile d'origine : a specificite egale, il l'ecraserait. On redeclare
+     donc le degrade vertical, seul lisible quand le texte occupe toute la
+     largeur. Il est legerement allege lui aussi. */
+  .hero-scrim{
+    background:linear-gradient(0deg,#000 0%,rgba(0,0,0,0.88) 22%,rgba(0,0,0,0.50) 50%,rgba(0,0,0,0.10) 100%);
+  }
+}
+
+/* ---------- le basculement : moins / plus ----------
+   Le document presente ce passage comme un tableau a deux colonnes. La mise
+   en page le reprend telle quelle : ce qui diminue a gauche, en retrait, ce
+   qui augmente a droite, appuye. Le filet central materialise la bascule.
+
+   Les deux colonnes se font face, la gauche alignee a droite et la droite
+   alignee a gauche : l'oeil lit chaque paire d'un seul mouvement, sans avoir
+   a chercher son vis-a-vis. */
+.bascule{position:relative;max-width:820px;margin:0 auto}
+.bascule::after{
+  content:'';position:absolute;top:0;bottom:0;left:50%;width:1px;
+  background:var(--line-ink);
+}
+.bascule-ligne{
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,4vw,54px);
+  align-items:baseline;padding:19px 0;
+  border-bottom:1px solid var(--line-ink);
+  font-size:clamp(14.5px,1.5vw,18px);line-height:1.35;
+}
+.bascule-ligne:first-child{border-top:1px solid var(--line-ink)}
+.bascule-moins{text-align:right;color:var(--ink-dim)}
+.bascule-plus{color:var(--ink);font-weight:600}
+
+@media (max-width:620px){
+  /* Deux colonnes restent lisibles a cette largeur, et elles sont le
+     propos : les empiler ferait perdre la mise en regard. */
+  .bascule-ligne{gap:16px;padding:15px 0;font-size:13.5px}
+}
+
+/* ===================================================================
+   IMAGES DE SECTION
+
+   Le document associe une image a chacune de ses sections. La page les
+   reprend, mais posees EN FOND sous un voile dense, et non en panneau plein
+   cadre.
+
+   Deux raisons a ce choix. Sept panneaux plein cadre d'affilee auraient fait
+   un diaporama, chaque section se reduisant a une photo avec du texte a
+   gauche. Surtout, ils auraient efface l'alternance sombre / creme qui fait
+   respirer le defilement : tout serait devenu sombre. Sous voile, l'image
+   donne son atmosphere a la section sans lui prendre son fond.
+
+   Le voile est plus dense sur creme que sur sombre. Une photo sombre posee
+   sur du creme jure beaucoup plus vite que la meme photo sur du noir : il
+   faut 91 % d'un cote pour l'equivalent de 84 % de l'autre.
+   =================================================================== */
+
+.sec--fond{position:relative;overflow:hidden}
+.sec-media{position:absolute;inset:0;z-index:0}
+.sec-voile{position:absolute;inset:0;z-index:0;pointer-events:none}
+/* Le contenu passe devant les deux couches. */
+.sec--fond > .wrap{position:relative;z-index:1}
+/* Le halo anime des sections sombres n'a plus lieu d'etre quand une photo
+   occupe deja le fond : les deux se superposeraient en un gris trouble. */
+.sec--fond::before{display:none}
+
+.sec--light .sec-voile{background:rgba(242,245,236,0.91)}
+.sec--light.sec--light-alt .sec-voile{background:rgba(231,236,222,0.91)}
+.sec--panel .sec-voile{background:rgba(8,11,9,0.84)}
+
+/* ---------- les quatre etapes de la chaine energetique ----------
+   Le document leur consacre quatre images verticales. Elles passent donc en
+   grille horizontale, une colonne par etape, l'image au-dessus du texte.
+
+   Le numero est genere par CSS et non ecrit dans le HTML : inscrire « 01 »
+   dans le texte obligerait a le traduire, et un lecteur d'ecran le lirait
+   comme un mot au milieu d'une phrase. */
+.etapes{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;counter-reset:etape}
+.etape{counter-increment:etape}
+.etape-img{
+  position:relative;aspect-ratio:4/5;overflow:hidden;
+  border:1px solid var(--line);border-radius:8px;background:var(--raise);
+  margin-bottom:20px;
+}
+.etape-img img{width:100%;height:100%;object-fit:cover;
+  transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+.etape:hover .etape-img img{transform:scale(1.05)}
+.etape-img::after{
+  content:counter(etape,decimal-leading-zero);
+  position:absolute;top:12px;left:12px;
+  width:32px;height:32px;display:grid;place-items:center;border-radius:50%;
+  font-size:11px;font-weight:700;letter-spacing:0.06em;color:var(--amber);
+  background:rgba(8,11,9,0.72);backdrop-filter:blur(6px);
+  border:1px solid rgba(253,176,34,0.42);
+}
+.etape h3{margin-bottom:9px;font-size:17px}
+
+@media (max-width:980px){
+  .etapes{grid-template-columns:repeat(2,1fr);gap:28px}
+}
+
+/* Sous 820 px, les quatre etapes deviennent un carrousel horizontal, comme
+   les autres grilles de cartes du site. La regle .slider est declaree plus
+   haut dans cette feuille : a specificite egale elle perdrait contre
+   .etapes, d'ou le selecteur double. */
+@media (max-width:820px){
+  .etapes.slider{display:flex;gap:14px}
+  .etapes.slider .etape-img{margin-bottom:16px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .etape:hover .etape-img img{transform:none}
+}
+
+/* ---------- feuille de route sur telephone ----------
+   La frise passait de quatre a deux colonnes a 1180 px et n'en bougeait
+   plus. Sur un ecran de 375 px, deux colonnes laissent 150 px par jalon
+   pour un titre et trois lignes de texte : illisible. Elle s'empile.
+
+   Le filet de chaque jalon depassait de 32 px a droite pour franchir la
+   gouttiere entre colonnes. Sans colonne voisine, ce depassement sortait
+   du cadre : on le ramene au bord. */
+@media (max-width:620px){
+  .rail{grid-template-columns:1fr;row-gap:32px}
+  .rail .step::before{right:0}
+}

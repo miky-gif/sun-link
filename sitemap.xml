@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Plan de site SunyGreen.
+
+  Chaque page est declaree une fois, avec ses deux versions linguistiques en
+  xhtml:link : c'est ainsi que les moteurs comprennent que /en/ n'est pas un
+  contenu duplique mais la traduction de la page francaise, et qu'ils servent
+  la bonne version selon la langue du visiteur.
+
+  La page 404 n'y figure pas : elle est en noindex.
+
+  >>> SI LE DOMAINE FINAL DIFFERE, remplacez www.sunygreen.com partout ici,
+      dans robots.txt, dans le .htaccess et dans les balises canonical.
+      Mettez aussi <lastmod> a la date reelle de mise en ligne.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- ============ ACCUEIL ============ -->
+  <url>
+    <loc>https://www.sunygreen.com/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sunygreen.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sunygreen.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sunygreen.com/"/>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+<image:image><image:loc>https://www.sunygreen.com/images/sunygreen-01-infrastructures-de-demain.webp</image:loc></image:image>
+<image:image><image:loc>https://www.sunygreen.com/images/sunygreen-01-infrastructures-de-demain.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.sunygreen.com/images/sunygreen-02-monde-sous-pression.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.sunygreen.com/images/sunygreen-03-enjeu-humain.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.sunygreen.com/images/sunygreen-04-basculement.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.sunygreen.com/images/sunygreen-etape-1-capter.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.sunygreen.com/images/sunygreen-etape-2-stocker.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.sunygreen.com/images/sunygreen-etape-3-transmettre.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.sunygreen.com/images/sunygreen-etape-4-agir.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.sunygreen.com/images/sunygreen-06-impact.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.sunygreen.com/images/sunygreen-07-applications.webp</image:loc></image:image>
+  </url>
+
+  <url>
+    <loc>https://www.sunygreen.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sunygreen.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sunygreen.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sunygreen.com/"/>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- ============ MENTIONS LEGALES ============ -->
+  <url>
+    <loc>https://www.sunygreen.com/mentions-legales.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sunygreen.com/mentions-legales.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sunygreen.com/en/legal-notice.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sunygreen.com/mentions-legales.html"/>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://www.sunygreen.com/en/legal-notice.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sunygreen.com/mentions-legales.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sunygreen.com/en/legal-notice.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sunygreen.com/mentions-legales.html"/>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- ============ CONFIDENTIALITE ============ -->
+  <url>
+    <loc>https://www.sunygreen.com/confidentialite.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sunygreen.com/confidentialite.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sunygreen.com/en/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sunygreen.com/confidentialite.html"/>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://www.sunygreen.com/en/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sunygreen.com/confidentialite.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sunygreen.com/en/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sunygreen.com/confidentialite.html"/>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- ============ COOKIES ============ -->
+  <url>
+    <loc>https://www.sunygreen.com/cookies.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sunygreen.com/cookies.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sunygreen.com/en/cookies.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sunygreen.com/cookies.html"/>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://www.sunygreen.com/en/cookies.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.sunygreen.com/cookies.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sunygreen.com/en/cookies.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sunygreen.com/cookies.html"/>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Page introuvable · SunyGreen</title>
+<meta name="description" content="La page demandée n'existe pas ou a été déplacée.">
+<!-- Une page d'erreur ne doit jamais entrer dans l'index des moteurs. -->
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#070A08">
+<link rel="icon" type="image/png" href="/images/favicon.png">
+<link rel="apple-touch-icon" href="/images/sunygreen-icone.png">
+
+<!-- Tous les chemins de cette page commencent par « / », et c'est
+     indispensable : Apache la sert a la place de n'importe quelle adresse
+     inexistante, sans changer l'adresse affichee. Pour une erreur sur
+     /en/une/adresse/fausse, un chemin relatif « assets/styles.css » serait
+     cherche dans /en/une/adresse/ et ne serait pas trouve.
+
+     CONSEQUENCE POUR L'APERCU : ouvrir ce fichier par double-clic
+     (adresse file://) affiche la page SANS mise en forme, puisque
+     « /assets/styles.css » designe alors la racine du disque. Ce n'est pas
+     un defaut de la page. Pour la voir telle qu'elle sera, lancez depuis
+     le dossier du site :
+
+         py -m http.server 8000
+
+     puis ouvrez http://localhost:8000/404.html -->
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/sora-latin.woff2" crossorigin>
+<link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+
+<nav class="nav nav--solid">
+  <a href="/" class="brand">
+    <img src="/images/sunygreen-logo.png" alt="Logo SunyGreen" width="440" height="147" decoding="async" />
+  </a>
+  <div class="nav-links">
+    <a href="/#solution">Solution</a>
+    <a href="/#secteurs">Secteurs</a>
+    <a href="/#consortium">Consortium</a>
+    <a href="/#roadmap">Feuille de route</a>
+  </div>
+</nav>
+
+<div class="sg-root">
+  <main class="err">
+    <div class="wrap">
+      <p class="eyebrow">Erreur 404</p>
+      <h1>Page<br>introuvable</h1>
+      <p class="lead">Cette adresse ne correspond à aucune page du site. Elle a peut-être été
+      déplacée, ou le lien qui vous a mené ici comporte une erreur.</p>
+      <p class="lead" lang="en">This address does not match any page on the site. It may have
+      been moved, or the link that brought you here contains a mistake.</p>
+      <div class="btn-row">
+        <a href="/" class="btn btn--solid btn--arrow">Retour à l'accueil</a>
+        <a href="/en/" class="btn btn--ghost" hreflang="en" lang="en">English version</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot-top">
+        <a href="/" class="brand">
+          <img src="/images/sunygreen-logo.png" alt="Logo SunyGreen" width="440" height="147" decoding="async" loading="lazy" />
+        </a>
+        <div class="foot-links">
+          <a href="/#contact">Contact</a>
+          <a href="/mentions-legales.html">Mentions légales</a>
+          <a href="/confidentialite.html">Confidentialité</a>
+          <a href="/cookies.html">Cookies</a>
+        </div>
+      </div>
+      <div class="foot-bot">
+        <div class="foot-copy">© 2026 SunyGreen</div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>

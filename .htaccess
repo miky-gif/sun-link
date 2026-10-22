@@ -1,0 +1,257 @@
+# =====================================================================
+# SunyGreen — configuration Apache (o2switch)
+#
+# Ce fichier n'est pas du contenu : c'est la couche qui rend le site
+# reellement diffusable — HTTPS force, adresse unique, en-tetes de
+# securite, compression et cache. Sans lui, le site fonctionne, mais il
+# reste plus lent, moins bien classe et plus expose.
+#
+# o2switch tourne sur Apache avec mod_rewrite, mod_deflate, mod_expires
+# et mod_headers actifs. Chaque bloc est neanmoins protege par un test
+# <IfModule> : si un module venait a manquer, le site continue de servir
+# au lieu de renvoyer une erreur 500.
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+# 1. Page d'erreur
+# ---------------------------------------------------------------------
+# Sans cette ligne, une adresse inexistante affiche la page grise
+# d'Apache, sans navigation ni retour possible vers le site.
+ErrorDocument 404 /404.html
+
+
+# ---------------------------------------------------------------------
+# 2. Adresse unique : HTTPS + www
+# ---------------------------------------------------------------------
+# Quatre adresses menent au meme site (http/https x avec/sans www). Pour
+# les moteurs, ce sont quatre sites qui se font concurrence entre eux.
+# On en designe une seule — celle des balises canonical — et les trois
+# autres y sont redirigees definitivement.
+#
+# >>> SI LE DOMAINE FINAL N'EST PAS www.sunygreen.com, corrigez la ligne
+#     RewriteRule ci-dessous, ainsi que les balises canonical des pages,
+#     robots.txt et sitemap.xml.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # HTTPS : o2switch place un proxy devant Apache, d'ou le test sur
+  # X-Forwarded-Proto en plus de la variable HTTPS classique.
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP:X-Forwarded-Proto} =http
+  RewriteRule ^ https://www.sunygreen.com%{REQUEST_URI} [R=301,L]
+
+  # Ajout du www quand il manque.
+  RewriteCond %{HTTP_HOST} !^www\. [NC]
+  RewriteRule ^ https://www.sunygreen.com%{REQUEST_URI} [R=301,L]
+
+  # /en  ->  /en/   : sans la barre finale, les chemins relatifs de la
+  # page anglaise se resolvent depuis la racine et cassent.
+  RewriteRule ^en$ /en/ [R=301,L]
+
+  # /en/index.html  ->  /en/    (et /index.html -> /)
+  #
+  # Les liens internes du site designent le fichier — « en/index.html » et
+  # non « en/ » — pour que la page anglaise s'ouvre aussi depuis le disque,
+  # sans serveur : un visiteur qui recoit le site en archive, un evaluateur
+  # du programme par exemple, verrait sinon la liste des fichiers du dossier.
+  #
+  # Sur le serveur, cette forme longue est ramenee a la forme courte, celle
+  # que declarent les balises canonical, le hreflang et le plan de site. Un
+  # seul jeu d'adresses reste donc visible des moteurs.
+  #
+  # Le test porte sur THE_REQUEST, c'est-a-dire la ligne de requete envoyee
+  # par le navigateur, et non sur le chemin en cours de traitement. Sans
+  # cette precaution, la resolution interne de « /en/ » vers son fichier
+  # d'index redeclencherait la regle, en boucle.
+  RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+  RewriteRule ^(.*/)?index\.html$ /%1 [R=301,L]
+
+
+  # -------------------------------------------------------------------
+  # Heritage de l'ancienne marque SUN-Link
+  # -------------------------------------------------------------------
+  # >>> A REMPLIR UNIQUEMENT SI UN SITE A DEJA ETE EN LIGNE SOUS L'ANCIEN
+  #     NOM. Si SunyGreen est la premiere mise en ligne du projet, laissez
+  #     ce bloc en commentaire : il n'y a rien a rediriger.
+  #
+  # Le changement de nom est invisible dans le code du site — plus aucune
+  # mention de SUN-Link n'y subsiste. Le risque est ailleurs : les adresses
+  # de l'ancien site restent dans l'index des moteurs et dans les liens
+  # deja publies (dossier JEWEL, sites des partenaires, courriels). Sans
+  # redirection, ces liens tombent en erreur et toute l'anciennete acquise
+  # par l'ancien domaine est perdue au lieu d'etre transmise au nouveau.
+  #
+  # Une redirection 301 dit au moteur : « cette page a demenage
+  # definitivement a cette adresse ». Il transfere alors le classement de
+  # l'ancienne vers la nouvelle, au lieu de repartir de zero.
+  #
+  # A) L'ancien domaine est distinct (ex. sun-link.eu) et pointe sur cet
+  #    hebergement : redirigez-le entierement vers l'accueil du nouveau.
+  #
+  # RewriteCond %{HTTP_HOST} ^(www\.)?sun-link\.(eu|com|be)$ [NC]
+  # RewriteRule ^(.*)$ https://www.sunygreen.com/$1 [R=301,L]
+  #
+  # B) Quelques anciennes adresses precises a faire correspondre, une par
+  #    une. Relevez-les dans Google Search Console (Pages > Introuvables)
+  #    ou dans les journaux d'acces du cPanel, puis ajoutez une ligne par
+  #    adresse. Redirigez vers la page equivalente, jamais toutes vers
+  #    l'accueil : une redirection sans rapport est traitee comme une 404.
+  #
+  # Redirect 301 /projet-sun-link.html      https://www.sunygreen.com/
+  # Redirect 301 /sun-link/consortium.html  https://www.sunygreen.com/#consortium
+  #
+  # Conservez ces redirections au moins un an : c'est le temps qu'il faut
+  # aux moteurs pour remplacer completement les anciennes adresses.
+</IfModule>
+
+
+# ---------------------------------------------------------------------
+# 3. En-tetes de securite
+# ---------------------------------------------------------------------
+<IfModule mod_headers.c>
+
+  # Politique de securite du contenu. Elle enumere les seules origines
+  # auxquelles la page a le droit de s'adresser ; tout le reste est
+  # bloque par le navigateur, y compris un script qu'un attaquant
+  # parviendrait a injecter.
+  #
+  #   script-src  'self' + l'empreinte de l'unique script inline
+  #               (celui qui pose la classe .sg-js dans le <head>).
+  #               Si vous modifiez ne serait-ce qu'un caractere de ce
+  #               script, recalculez l'empreinte, sinon il sera bloque :
+  #               openssl dgst -sha256 -binary <<< -n "le script" | base64
+  #   connect-src api.web3forms.com — la destination du formulaire.
+  #   form-action idem, pour l'envoi natif si le JavaScript est absent.
+  #   frame-ancestors 'none' — le site ne peut pas etre place dans une
+  #               iframe : c'est la protection contre le clickjacking.
+  #   Aucune origine tierce n'est autorisee ailleurs : ni CDN, ni police
+  #               distante, ni traceur. C'est possible parce que le site
+  #               n'en utilise aucun.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-maDo0shAvx2Bp7wrmaS8UcYg7VekVaa2iajCcyADHow='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+
+  # Empeche le navigateur de "deviner" le type d'un fichier : un fichier
+  # servi en text/plain ne pourra pas etre execute comme du script.
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Equivalent historique de frame-ancestors, pour les navigateurs
+  # anciens qui ignorent la CSP.
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Ne transmet l'adresse de la page d'origine qu'aux sites en HTTPS, et
+  # jamais le chemin complet vers un site tiers.
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Le site n'a besoin ni de la camera, ni du micro, ni de la position :
+  # on retire explicitement ces permissions.
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+
+  # HSTS : le navigateur refusera toute connexion en clair vers ce
+  # domaine pendant un an.
+  #
+  # >>> A N'ACTIVER QU'UNE FOIS LE CERTIFICAT HTTPS EN PLACE ET VERIFIE.
+  #     Active trop tot, il rend le site inaccessible jusqu'a expiration
+  #     du delai, sans possibilite de revenir en arriere cote visiteur.
+  #     Retirez le # de la ligne suivante apres avoir confirme que
+  #     https://www.sunygreen.com s'affiche correctement.
+  # Header always set Strict-Transport-Security "max-age=31536000"
+
+  # Les polices sont servies depuis ce domaine, mais certains
+  # navigateurs exigent tout de meme l'en-tete CORS sur les fichiers
+  # charges via <link rel="preload" crossorigin>.
+  <FilesMatch "\.(woff2?)$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+</IfModule>
+
+
+# ---------------------------------------------------------------------
+# 4. Compression
+# ---------------------------------------------------------------------
+# Le HTML, la CSS et le JS sont du texte : la compression divise leur
+# poids par trois a quatre. Images et polices woff2 sont deja
+# compressees — les recompresser couterait du processeur pour rien.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+  AddOutputFilterByType DEFLATE application/json application/ld+json
+  AddOutputFilterByType DEFLATE application/xml application/rss+xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+
+# ---------------------------------------------------------------------
+# 5. Cache navigateur
+# ---------------------------------------------------------------------
+# Images et polices ne changent pas de contenu sans changer de nom : on
+# les garde un an. La CSS et le JS portent le meme nom d'une version a
+# l'autre, donc une semaine seulement, sinon une correction mettrait
+# sept jours a atteindre les visiteurs deja venus.
+#
+# Le HTML n'est jamais mis en cache durablement : c'est lui qui pilote
+# tout le reste, il doit toujours etre relu.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault                          "access plus 1 month"
+
+  ExpiresByType text/html                 "access plus 0 seconds"
+
+  ExpiresByType image/webp                "access plus 1 year"
+  ExpiresByType image/jpeg                "access plus 1 year"
+  ExpiresByType image/png                 "access plus 1 year"
+  ExpiresByType image/svg+xml             "access plus 1 year"
+  ExpiresByType image/x-icon              "access plus 1 year"
+  ExpiresByType font/woff2                "access plus 1 year"
+
+  ExpiresByType text/css                  "access plus 1 week"
+  ExpiresByType application/javascript    "access plus 1 week"
+
+  ExpiresByType application/xml           "access plus 1 day"
+  ExpiresByType text/plain                "access plus 1 day"
+</IfModule>
+
+<IfModule mod_headers.c>
+  # must-revalidate : le navigateur peut garder la page, mais doit
+  # demander au serveur si elle a change avant de la reafficher.
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+  # immutable : promesse faite au navigateur que ce fichier ne changera
+  # jamais sous ce nom. Il cesse alors meme de demander s'il a change.
+  <FilesMatch "\.(webp|jpg|jpeg|png|svg|ico|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+
+# ---------------------------------------------------------------------
+# 6. Types MIME
+# ---------------------------------------------------------------------
+# Servis avec le mauvais type, une police n'est pas chargee et une image
+# webp n'est pas affichee. Les Apache recents les connaissent, mais la
+# declaration ne coute rien et evite un diagnostic penible.
+<IfModule mod_mime.c>
+  AddType image/webp                  .webp
+  AddType image/svg+xml               .svg
+  AddType font/woff2                  .woff2
+  AddType application/ld+json         .jsonld
+  AddType application/manifest+json   .webmanifest
+  AddCharset UTF-8                    .html .css .js .xml .txt
+</IfModule>
+
+
+# ---------------------------------------------------------------------
+# 7. Acces aux fichiers
+# ---------------------------------------------------------------------
+# Sans cette ligne, ouvrir /images/ affiche la liste complete des
+# fichiers du dossier.
+Options -Indexes
+
+# Fichiers de travail qui n'ont rien a faire en ligne s'ils sont
+# televerses par megarde.
+<FilesMatch "^(\.htaccess|\.gitignore|\.git.*|.*\.md|.*\.py|.*\.cmd|.*\.bat|.*\.docx?|.*\.zip|.*\.rar|.*\.psd)$">
+  Require all denied
+</FilesMatch>
+
+# Empeche la lecture du dossier .git s'il a ete televerse.
+RedirectMatch 404 /\.git

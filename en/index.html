@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+<meta charset="utf-8">
+<!-- The site has its own French version: stop the browser translator from
+     re-translating this page, or a French-speaking visitor sees the English
+     text switch straight back to French. -->
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>SunyGreen · Self-powered technologies for infrastructure</title>
+<meta name="description" content="Self-powered IoT technologies: no battery, no wiring, over 800 m of range through concrete. First application, industrial alerting.">
+<link rel="canonical" href="https://www.sunygreen.com/en/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="theme-color" content="#070A08">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<link rel="apple-touch-icon" href="../images/sunygreen-icone.png">
+
+<!-- Bilingual site with separate routes (specification, §5). Each version
+     declares both, plus the default served to all other languages. -->
+<link rel="alternate" hreflang="fr" href="https://www.sunygreen.com/">
+<link rel="alternate" hreflang="en" href="https://www.sunygreen.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://www.sunygreen.com/">
+
+<!-- Sharing on social networks and messaging apps -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SunyGreen">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:url" content="https://www.sunygreen.com/en/">
+<meta property="og:title" content="SunyGreen · Self-powered technologies for infrastructure">
+<meta property="og:description" content="Self-powered IoT technologies: no battery, no wiring, over 800 m of range through concrete. First application, industrial alerting.">
+<meta property="og:image" content="https://www.sunygreen.com/images/og-sunygreen.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SunyGreen button fitted to a machine in an industrial workshop at night">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SunyGreen · Self-powered technologies for infrastructure">
+<meta name="twitter:description" content="Self-powered IoT technologies: no battery, no wiring, over 800 m of range through concrete. First application, industrial alerting.">
+<meta name="twitter:image" content="https://www.sunygreen.com/images/og-sunygreen.jpg">
+
+<!-- The hero photo is the largest element on screen: request it early -->
+<link rel="preload" as="image" href="../images/sunygreen-01-infrastructures-de-demain.webp" fetchpriority="high">
+<!-- The typeface is served from this server: no third-party request.
+     Preloaded, otherwise it is only fetched after the CSS is parsed. -->
+<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/sora-latin.woff2" crossorigin>
+<link rel="stylesheet" href="../assets/styles.css">
+<script>document.documentElement.classList.add('sg-js')</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Organization",
+   "@id": "https://www.sunygreen.com/#organisation",
+   "name": "SunyGreen",
+   "url": "https://www.sunygreen.com/",
+   "email": "contact@sunygreen.com",
+   "description": "European consortium developing SunyGreen, self-powered technologies for connected infrastructure.",
+   "logo": {
+    "@type": "ImageObject",
+    "url": "https://www.sunygreen.com/images/sunygreen-logo.png",
+    "width": 440,
+    "height": 147
+   },
+   "member": [
+    {
+     "@type": "Organization",
+     "name": "BLINQY",
+     "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Charleroi",
+      "addressCountry": "BE"
+     }
+    },
+    {
+     "@type": "Organization",
+     "name": "e-peas"
+    },
+    {
+     "@type": "Organization",
+     "name": "Enfucell"
+    },
+    {
+     "@type": "Organization",
+     "name": "DHF",
+     "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Ovifat",
+      "addressCountry": "BE"
+     }
+    }
+   ]
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://www.sunygreen.com/en/#site",
+   "url": "https://www.sunygreen.com/en/",
+   "name": "SunyGreen",
+   "inLanguage": "en-GB",
+   "publisher": {
+    "@id": "https://www.sunygreen.com/#organisation"
+   }
+  },
+  {
+   "@type": "Product",
+   "name": "SunyGreen",
+   "description": "Self-powered technologies: organic photovoltaic harvesting, ultra-low-power management and Bluetooth Low Energy Coded PHY communication beyond 800 metres through concrete. First application, an industrial alert device with no battery and no wiring.",
+   "image": "https://www.sunygreen.com/images/og-sunygreen.jpg",
+   "category": "Self-powered IoT technology",
+   "brand": {
+    "@id": "https://www.sunygreen.com/#organisation"
+   },
+   "additionalProperty": [
+    {
+     "@type": "PropertyValue",
+     "name": "Range",
+     "value": "800 m and beyond through concrete"
+    },
+    {
+     "@type": "PropertyValue",
+     "name": "Power source",
+     "value": "Organic photovoltaics, ambient light"
+    },
+    {
+     "@type": "PropertyValue",
+     "name": "Communication",
+     "value": "Bluetooth Low Energy Coded PHY"
+    },
+    {
+     "@type": "PropertyValue",
+     "name": "Maintenance",
+     "value": "None, no battery, no wiring"
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<a href="#home" class="skip">Skip to content</a>
+
+<!-- ============ NAVIGATION ============ -->
+<nav class="nav">
+  <a href="#home" class="brand">
+    <img src="../images/sunygreen-logo.png" alt="SunyGreen logo" width="440" height="147" decoding="async" />
+  </a>
+  <div class="nav-links">
+    <a href="#solution">Solution</a>
+    <a href="#sectors">Sectors</a>
+    <a href="#consortium">Consortium</a>
+    <a href="#roadmap">Roadmap</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang" data-langue>
+      <button type="button" class="lang-btn" aria-expanded="false"
+              aria-controls="choix-langue" aria-label="Language: English. Open the language chooser">
+        <span class="lang-drapeau lang-drapeau--gb" aria-hidden="true"></span>
+        <span class="lang-code">EN</span>
+        <span class="lang-chevron" aria-hidden="true"></span>
+      </button>
+      <ul class="lang-liste" id="choix-langue" hidden>
+        <li><span class="lang-opt is-on" aria-current="true"><span class="lang-drapeau lang-drapeau--gb" aria-hidden="true"></span>English</span></li>
+        <li><a class="lang-opt" href="../index.html" hreflang="fr" lang="fr"><span class="lang-drapeau lang-drapeau--fr" aria-hidden="true"></span>Français</a></li>
+      </ul>
+    </div>
+    <a href="#contact" class="btn btn--solid nav-cta">Contact us</a>
+    <button type="button" class="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span>
+    </button>
+  </div>
+  <div class="menu" id="menu" hidden>
+    <a href="#solution">Solution</a>
+    <a href="#sectors">Sectors</a>
+    <a href="#consortium">Consortium</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#contact" class="btn btn--solid">Contact us</a>
+    <a href="../index.html" hreflang="fr" lang="fr" class="menu-lang">Version française</a>
+  </div>
+</nav>
+
+<div class="sg-root">
+  <!-- ============ HOME ============ -->
+  <header id="home" class="hero">
+    <div class="hero-media"><img id="photo-accueil" src="../images/sunygreen-01-infrastructures-de-demain.webp" alt="SunyGreen button fitted to a machine in an industrial workshop at night"  width="1388" height="781" decoding="async" fetchpriority="high" /></div>
+    <div class="hero-scrim"></div>
+    <div class="wrap hero-inner">
+      <div class="hero-copy reveal">
+        <p class="eyebrow">Building the infrastructure of tomorrow</p>
+        <h1>More people. More services. Fewer resources.</h1>
+        <p class="lead">As the world grows and infrastructure expands, organizations face a common challenge: delivering more value, greater resilience and better services while consuming fewer resources. SunyGreen develops the autonomous technologies that make this transition possible.</p>
+        <div class="btn-row">
+          <a href="#solution" class="btn btn--solid btn--arrow">Explore the solution</a>
+          <a href="#contact" class="btn btn--ghost">Contact us</a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-cue"></div>
+  </header>
+
+  <!-- ============ KEY FIGURES ============ -->
+  <section class="stats">
+    <div class="wrap">
+      <div class="stats-grid reveal cascade">
+        <div class="stat">
+          <p class="stat-k">Measured range</p>
+          <div class="stat-v" data-compte="800" data-suffixe=" m+">800&nbsp;m+</div>
+          <p class="stat-u">through concrete</p>
+        </div>
+        <div class="stat">
+          <p class="stat-k">Autonomy</p>
+          <div class="stat-v">For life</div>
+          <p class="stat-u">no battery, no wiring</p>
+        </div>
+        <div class="stat">
+          <p class="stat-k">Installation</p>
+          <div class="stat-v">2&nbsp;min</div>
+          <p class="stat-u">no building work</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTEXT ============ -->
+  <section id="context" class="sec sec--light sec--fond">
+    <div class="sec-media"><img src="../images/sunygreen-02-monde-sous-pression.webp" alt="Landscape of rail and industrial infrastructure at sunset" width="1388" height="781" decoding="async" loading="lazy" /></div>
+    <div class="sec-voile"></div>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">A world under pressure</p>
+        <h2>Infrastructure is expanding. Resources are not.</h2>
+        <p class="lead">A global contradiction is emerging. Around the world, infrastructure is becoming more connected, more complex and more essential. Yet the resources required to power, maintain and sustain these systems remain limited. The challenge is no longer growth alone. It is sustainable growth.</p>
+      </div>
+      <div class="grid-4-open reveal cascade">
+        <div class="impact">
+          <h3>More infrastructure</h3>
+          <p class="body">It is expanding across every sector, at a pace that is not slowing.</p>
+        </div>
+        <div class="impact">
+          <h3>More connectivity</h3>
+          <p class="body">It now reaches every environment, including the least accessible.</p>
+        </div>
+        <div class="impact">
+          <h3>Finite resources</h3>
+          <p class="body">Energy, materials and maintenance cannot simply be scaled up.</p>
+        </div>
+        <div class="impact">
+          <h3>Growing expectations</h3>
+          <p class="body">Safety, performance and sustainability are now expected together.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY IT MATTERS ============ -->
+  <section id="why-it-matters" class="sec sec--panel sec--fond">
+    <div class="sec-media"><img src="../images/sunygreen-03-enjeu-humain.webp" alt="Operator pressing the SunyGreen unit in an industrial hall" width="1388" height="781" decoding="async" loading="lazy" /></div>
+    <div class="sec-voile"></div>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Why it matters</p>
+        <h2>When systems fail, the impact is not technical. It is human.</h2>
+        <p class="lead">Infrastructure exists to serve people. Requesting assistance, accessing a service, triggering an alert: every interaction matters, and each one relies on infrastructure that has to respond.</p>
+      </div>
+      <div class="grid-4-open reveal cascade">
+        <div class="impact">
+          <h3>Safety</h3>
+          <p class="body">Raising the alert at the moment it actually changes something.</p>
+        </div>
+        <div class="impact">
+          <h3>Accessibility</h3>
+          <p class="body">A simple gesture, within reach, in any environment.</p>
+        </div>
+        <div class="impact">
+          <h3>Reliability</h3>
+          <p class="body">A system that answers without depending on a battery or a cable.</p>
+        </div>
+        <div class="impact">
+          <h3>Continuity</h3>
+          <p class="body">A service that is not interrupted for maintenance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE SHIFT ============ -->
+  <section id="the-shift" class="sec sec--light sec--light-alt sec--fond">
+    <div class="sec-media"><img src="../images/sunygreen-04-basculement.webp" alt="Industrial site at sunrise, with a panel listing the gains delivered by SunyGreen" width="1388" height="781" decoding="async" loading="lazy" /></div>
+    <div class="sec-voile"></div>
+    <div class="wrap">
+      <div class="sec-head sec-head--center reveal">
+        <p class="eyebrow">The shift</p>
+        <h2>A new model is emerging</h2>
+        <p class="lead">Less dependency, more resilience. Infrastructure should not require continuous intervention to remain operational.</p>
+      </div>
+      <div class="bascule reveal cascade">
+        <div class="bascule-ligne"><span class="bascule-moins">Less maintenance</span><span class="bascule-plus">More reliability</span></div>
+        <div class="bascule-ligne"><span class="bascule-moins">Less waste</span><span class="bascule-plus">More sustainability</span></div>
+        <div class="bascule-ligne"><span class="bascule-moins">Less complexity</span><span class="bascule-plus">More simplicity</span></div>
+        <div class="bascule-ligne"><span class="bascule-moins">Less dependency</span><span class="bascule-plus">More autonomy</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section id="solution" class="sec sec--panel sec--trame">
+    <div class="wrap">
+      <div class="sec-head sec-head--center reveal">
+        <p class="eyebrow">Our response</p>
+        <h2>Four steps, no battery</h2>
+        <p class="lead">SunyGreen receives no energy from outside. It harvests what is already present in its environment, stores it, and communicates only when it matters.</p>
+      </div>
+      <div class="etapes slider reveal cascade">
+        <article class="etape">
+          <div class="etape-img"><img src="../images/sunygreen-etape-1-capter.webp" alt="SunyGreen button on a wall beneath a sun symbol casting a beam of light" width="880" height="1100" decoding="async" loading="lazy" /></div>
+          <h3>Harvest</h3>
+          <p class="body">An organic photovoltaic cell draws energy from ambient light. Workshop lighting is enough: full sunlight is not required.</p>
+        </article>
+        <article class="etape">
+          <div class="etape-img"><img src="../images/sunygreen-etape-2-stocker.webp" alt="SunyGreen button on a concrete wall beside a glowing battery symbol" width="880" height="1095" decoding="async" loading="lazy" /></div>
+          <h3>Store</h3>
+          <p class="body">An ultra-low-power management circuit smooths the supply and builds a reserve that covers the hours without light.</p>
+        </article>
+        <article class="etape">
+          <div class="etape-img"><img src="../images/sunygreen-etape-3-transmettre.webp" alt="Helmeted operator pressing the transmit key of the SunyGreen button in an industrial hall" width="880" height="1100" decoding="async" loading="lazy" /></div>
+          <h3>Transmit</h3>
+          <p class="body">BLE Coded PHY carries the message beyond 800&nbsp;metres, through concrete, for a minimal energy cost.</p>
+        </article>
+        <article class="etape">
+          <div class="etape-img"><img src="../images/sunygreen-etape-4-agir.webp" alt="Smartwatch on a responder's wrist showing a danger alert for zone 2" width="880" height="1100" decoding="async" loading="lazy" /></div>
+          <h3>Act</h3>
+          <p class="body">The alert reaches the person concerned. No cabling, no dedicated gateway, no intervention.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ IMPACT ============ -->
+  <section id="impact" class="sec sec--light sec--fond">
+    <div class="sec-media"><img src="../images/sunygreen-06-impact.webp" alt="Industrial site set in a wooded valley in morning light" width="1388" height="781" decoding="async" loading="lazy" /></div>
+    <div class="sec-voile"></div>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Impact</p>
+        <h2>What energy autonomy changes</h2>
+      </div>
+      <div class="grid-3-open reveal cascade">
+        <div class="impact impact--on">
+          <h3>Environmental</h3>
+          <p class="body">Less waste, lower resource use, a reduced footprint: every device deployed means disposable batteries avoided for life.</p>
+        </div>
+        <div class="impact">
+          <h3>Economic</h3>
+          <p class="body">Less maintenance, greater uptime, faster deployment: total cost of ownership falls and efficiency rises.</p>
+        </div>
+        <div class="impact">
+          <h3>Strategic</h3>
+          <p class="body">Safer interactions and improved continuity of service, carried by an IoT value chain designed and validated in Europe.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTORS ============ -->
+  <section id="sectors" class="sec sec--light sec--light-alt sec--fond">
+    <div class="sec-media"><img src="../images/sunygreen-07-applications.webp" alt="Mosaic of nine environments: offices, industry, mining, tunnel, control room, transport, logistics, energy, water treatment" width="1388" height="781" decoding="async" loading="lazy" /></div>
+    <div class="sec-voile"></div>
+    <div class="wrap">
+      <div class="sec-head sec-head--center reveal">
+        <p class="eyebrow">Applications</p>
+        <h2>One platform. Multiple environments.</h2>
+        <p class="lead">One technology answers wherever energy, cabling or range stand in the way. The project focuses first on three priority sectors; the others will follow.</p>
+      </div>
+      <div class="tabs reveal" role="tablist" aria-label="Sector families">
+        <button type="button" class="tab is-on" role="tab" id="tab-prio" aria-controls="sectors-prio" aria-selected="true">Priority sectors</button>
+        <button type="button" class="tab" role="tab" id="tab-ext" aria-controls="sectors-ext" aria-selected="false">Planned extensions</button>
+      </div>
+      <div class="grid-3 slider reveal cascade" id="sectors-prio" data-secteurs role="tabpanel" aria-labelledby="tab-prio">
+          <article class="card">
+            <h3>Industry &amp; factories</h3>
+            <p class="body">Reporting a machine fault, calling maintenance or requesting supplies at the workstation, without ever stopping the line.</p>
+            <div class="card-list">
+              <div class="card-li">Assistance call at the workstation</div>
+              <div class="card-li">Real-time machine alerts</div>
+            </div>
+            <div class="card-foot">
+              <p class="stat-k">Range</p>
+              <span class="stat-v">800&nbsp;m+</span><span class="stat-u">through concrete</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>Mining</h3>
+            <p class="body">Safety alerts and operational communication where wiring is impossible and every minute counts.</p>
+            <div class="card-list">
+              <div class="card-li">Instant safety alert</div>
+              <div class="card-li">No wiring required</div>
+            </div>
+            <div class="card-foot">
+              <p class="stat-k">Autonomy</p>
+              <span class="stat-v">For life</span><span class="stat-u">no battery</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>Logistics</h3>
+            <p class="body">Forklift calls, dock reporting and intervention requests across vast warehouses that are constantly reconfigured.</p>
+            <div class="card-list">
+              <div class="card-li">Forklift call</div>
+              <div class="card-li">Loading-dock reporting</div>
+            </div>
+            <div class="card-foot">
+              <p class="stat-k">Installation</p>
+              <span class="stat-v">2&nbsp;min</span><span class="stat-u">no building work</span>
+            </div>
+          </article>
+      </div>
+      <div class="grid-3 slider reveal cascade" id="sectors-ext" data-secteurs role="tabpanel" aria-labelledby="tab-ext" hidden>
+          <article class="card">
+            <h3>Hospitality</h3>
+            <p class="body">Discreet staff calls and service requests in guest rooms and common areas.</p>
+            <div class="card-list">
+              <div class="card-li">Discreet staff call</div>
+              <div class="card-li">No visible maintenance</div>
+            </div>
+            <div class="card-foot">
+              <p class="stat-k">Status</p>
+              <span class="stat-v">Under study</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>Critical infrastructure</h3>
+            <p class="body">Reporting and supervision where reliability comes first and mains power cannot be guaranteed.</p>
+            <div class="card-list">
+              <div class="card-li">Long-term reliability</div>
+              <div class="card-li">No mains dependency</div>
+            </div>
+            <div class="card-foot">
+              <p class="stat-k">Status</p>
+              <span class="stat-v">Under study</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>Healthcare</h3>
+            <p class="body">Patient and caregiver assistance calls, free of wiring and handling constraints.</p>
+            <div class="card-list">
+              <div class="card-li">Fast assistance call</div>
+              <div class="card-li">Hygiene, no battery to handle</div>
+            </div>
+            <div class="card-foot">
+              <p class="stat-k">Status</p>
+              <span class="stat-v">Under study</span>
+            </div>
+          </article>
+      </div>
+      <p class="fine cmp-note">The range and autonomy figures shown are project targets, currently being validated in real-world conditions at the pilot customer site.</p>
+    </div>
+  </section>
+
+  <!-- ============ COMPARISON ============ -->
+  <section class="sec sec--panel sec--trame">
+    <div class="wrap">
+      <div class="sec-head sec-head--center reveal">
+        <p class="eyebrow">Comparison</p>
+        <h2>Why SunyGreen is different</h2>
+      </div>
+      <div class="cmp-scroll reveal">
+        <table class="cmp">
+          <thead>
+            <tr>
+              <th>Criterion</th>
+              <th>Battery buttons</th>
+              <th>Wired systems</th>
+              <th class="col-us">SunyGreen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Power</th>
+              <td>Batteries to replace</td>
+              <td>Mains powered</td>
+              <td class="col-us">Self-powered by light</td>
+            </tr>
+            <tr>
+              <th>Installation</th>
+              <td>Quick</td>
+              <td>Long, costly wiring</td>
+              <td class="col-us">A few minutes</td>
+            </tr>
+            <tr>
+              <th>In-building range</th>
+              <td>Limited</td>
+              <td>As far as the cable</td>
+              <td class="col-us">800&nbsp;m+ concrete</td>
+            </tr>
+            <tr>
+              <th>Maintenance</th>
+              <td>Battery replacement</td>
+              <td>Wired intervention</td>
+              <td class="col-us">None</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="fine cmp-hint">Scroll the table sideways to see it all &#8594;</p>
+    </div>
+  </section>
+
+  <!-- ============ CONSORTIUM ============ -->
+  <section id="consortium" class="sec sec--light sec--tight">
+    <div class="wrap">
+      <div class="sec-head sec-head--center reveal">
+        <p class="eyebrow">The consortium</p>
+        <h2>A European chain of expertise</h2>
+        <p class="lead">Each partner contributes one link of the solution, from the component to validation in real-world conditions.</p>
+      </div>
+      <div class="grid-4 slider reveal cascade">
+        <div class="partner">
+          <div class="partner-logo"><img id="logo-blinqy" src="../images/logo-blinqy.webp" alt="BLINQY logo"  width="428" height="132" decoding="async" loading="lazy" /></div>
+          <h3>BLINQY</h3>
+          <p class="partner-loc">Charleroi · Belgium</p>
+          <p class="body">Design of the IoT node and embedded electronics.</p>
+        </div>
+        <div class="partner">
+          <div class="partner-logo"><img id="logo-epeas" src="../images/logo-e-peas.webp" alt="e-peas logo"  width="223" height="65" decoding="async" loading="lazy" /></div>
+          <h3>e-peas</h3>
+          <p class="partner-loc">Partner</p>
+          <p class="body">Ultra-low-power management (PMIC).</p>
+        </div>
+        <div class="partner">
+          <div class="partner-logo"><img id="logo-enfucell" src="../images/logo-enfucell.webp" alt="Enfucell logo"  width="189" height="52" decoding="async" loading="lazy" /></div>
+          <h3>Enfucell</h3>
+          <p class="partner-loc">Partner</p>
+          <p class="body">Flexible energy storage paired with OPV harvesting.</p>
+        </div>
+        <div class="partner">
+          <div class="partner-logo"><img id="logo-dhf" src="../images/logo-dhf.webp" alt="DHF logo"  width="300" height="90" decoding="async" loading="lazy" /></div>
+          <h3>DHF</h3>
+          <p class="partner-loc">Ovifat · Pilot customer</p>
+          <p class="body">Validation in a real operational environment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ROADMAP ============ -->
+  <section id="roadmap" class="sec sec--panel sec--trame">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Roadmap</p>
+        <h2>From the lab to the field in 9&nbsp;months</h2>
+        <p class="lead">The project advances SunyGreen from <strong>TRL&nbsp;5</strong>, validated in the laboratory, to <strong>TRL&nbsp;7</strong>, a prototype demonstrated in real conditions at the customer site.</p>
+      </div>
+      <div class="rail reveal cascade">
+        <div class="step step--on">
+          <p class="step-k">Months 1 to 2 · TRL 5</p>
+          <h3>Consolidation</h3>
+          <p class="body">Consolidated laboratory validation, specification of the autonomous node and the software chain.</p>
+        </div>
+        <div class="step">
+          <p class="step-k">Months 3 to 5 · TRL 6</p>
+          <h3>Integrated prototype</h3>
+          <p class="body">OPV + PMIC + long-range BLE integration, low-power firmware, representative testing.</p>
+        </div>
+        <div class="step">
+          <p class="step-k">Months 6 to 8 · TRL 6 to 7</p>
+          <h3>Pilot deployment</h3>
+          <p class="body">Installation at DHF (Ovifat), range and autonomy measurements in real industrial conditions.</p>
+        </div>
+        <div class="step step--on">
+          <p class="step-k">Month 9 · TRL 7</p>
+          <h3>Demonstration</h3>
+          <p class="body">Prototype demonstrated in an operational environment: the final milestone of the project.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE FUTURE ============ -->
+  <section id="the-future" class="sec sec--light sec--light-alt">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">The future</p>
+        <h2>The next generation of infrastructure has already begun</h2>
+        <p class="lead">More sustainable. More resilient. More human. Building better infrastructure is no longer an ambition, it has become a necessity.</p>
+        <div class="btn-row"><a href="#contact" class="btn btn--solid btn--arrow">Let's talk about your project</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" class="sec sec--panel sec--wide sec--ondes">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="reveal">
+          <p class="eyebrow">Contact</p>
+          <h2>Let's talk about your site</h2>
+          <p class="lead">Evaluator, partner or manufacturer interested in a pilot: write to us and we will reply quickly.</p>
+          <div class="contact-meta">
+            <div class="meta-row"><span class="meta-k">Email</span>contact@sunygreen.com</div>
+            <div class="meta-row"><span class="meta-k">Project</span>SunyGreen consortium</div>
+          </div>
+        </div>
+        <!-- Sent through Web3Forms: no server of our own, the message is
+             delivered by email. The access key must match the one in the
+             French page (../index.html), see DEPLOIEMENT.md. -->
+        <form class="form reveal"
+              action="https://api.web3forms.com/submit" method="POST"
+              data-envoi="Sending…"
+              data-succes-bouton="Message sent ✓"
+              data-succes="Thank you, your message is on its way. We will get back to you shortly."
+              data-erreur="Sending failed. Please try again, or write directly to contact@sunygreen.com.">
+          <input type="hidden" name="access_key" value="REMPLACER-PAR-LA-CLE-WEB3FORMS">
+          <input type="hidden" name="subject" value="SunyGreen: new message from the website">
+          <input type="hidden" name="from_name" value="SunyGreen website">
+          <!-- Bot trap: a human never fills in an invisible field. -->
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="form-row">
+            <label class="field"><span>Name</span><input type="text" name="Name" required autocomplete="name" placeholder="Your name" /></label>
+            <label class="field"><span>Organisation</span><input type="text" name="Organisation" autocomplete="organization" placeholder="Company / institution" /></label>
+          </div>
+          <label class="field"><span>Email</span><input type="email" name="Email" required autocomplete="email" placeholder="you@example.com" /></label>
+          <label class="field"><span>Message</span><textarea name="Message" rows="4" required placeholder="Your message…"></textarea></label>
+          <label class="consent">
+            <input type="checkbox" name="Consent" value="yes" required />
+            <span>I agree that my data may be used to respond to my enquiry.</span>
+          </label>
+          <button type="submit" class="btn btn--solid">Send message</button>
+          <p class="form-etat" role="status" aria-live="polite"></p>
+          <p class="fine">Your data is used solely to answer your enquiry and kept for 3&nbsp;years, in accordance with our <a href="privacy.html">privacy policy</a>. No server of our own: submissions are relayed by Web3Forms.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot-top">
+        <a href="#home" class="brand">
+          <img src="../images/sunygreen-logo.png" alt="SunyGreen logo" width="440" height="147" decoding="async" loading="lazy" />
+        </a>
+        <div class="foot-links">
+          <a href="#solution">Solution</a>
+          <a href="#sectors">Sectors</a>
+          <a href="#consortium">Consortium</a>
+          <a href="#roadmap">Roadmap</a>
+          <a href="#contact">Contact</a>
+          <a href="legal-notice.html">Legal notice</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="cookies.html">Cookies</a>
+        </div>
+      </div>
+      <div class="foot-bot">
+        <div class="foot-copy">© 2026 SunyGreen</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ COOKIE BANNER ============ -->
+  <div class="cookie">
+    <p class="fine">This site uses strictly necessary storage only. No advertising trackers. <a href="cookies.html">Find out more</a>.</p>
+    <div class="cookie-actions">
+      <button type="button" class="btn btn--ghost" data-choix="refuse">Decline</button>
+      <button type="button" class="btn btn--solid" data-choix="accepte">Accept</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

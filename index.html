@@ -3,486 +3,193 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SUN-Link — Une alerte industrielle fiable et autonome</title>
-<meta name="description" content="SUN-Link : un bouton d'alerte industriel alimenté par la lumière ambiante, sans pile ni câble, dont la portée dépasse 800 m à travers le béton. Projet européen JEWEL.">
-<meta name="theme-color" content="#000000">
-<link rel="icon" href="images/favicon.svg">
+
+<title>SunyGreen · Technologies autonomes pour l'infrastructure</title>
+<meta name="description" content="Technologies IoT autonomes en énergie : ni pile, ni câble, plus de 800 m de portée à travers le béton. Première application, l'alerte industrielle.">
+<link rel="canonical" href="https://www.sunygreen.com/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="theme-color" content="#070A08">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/sunygreen-icone.png">
+
+<!-- Site bilingue a routes separees (cahier des charges, §5). Chaque version
+     declare les deux, plus la version par defaut servie aux autres langues. -->
+<link rel="alternate" hreflang="fr" href="https://www.sunygreen.com/">
+<link rel="alternate" hreflang="en" href="https://www.sunygreen.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://www.sunygreen.com/">
+
+<!-- Partage sur les reseaux et messageries -->
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="SunyGreen">
 <meta property="og:locale" content="fr_FR">
-<meta property="og:title" content="SUN-Link — Une alerte industrielle fiable et autonome">
-<meta property="og:description" content="Un bouton connecté qui se pose partout, ne réclame ni pile ni câble, et porte à travers le béton d'un bout à l'autre du site.">
-<script src="./support.js"></script>
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:url" content="https://www.sunygreen.com/">
+<meta property="og:title" content="SunyGreen · Technologies autonomes pour l'infrastructure">
+<meta property="og:description" content="Technologies IoT autonomes en énergie : ni pile, ni câble, plus de 800 m de portée à travers le béton. Première application, l'alerte industrielle.">
+<meta property="og:image" content="https://www.sunygreen.com/images/og-sunygreen.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Bouton SunyGreen installé sur une machine, dans un atelier industriel de nuit">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SunyGreen · Technologies autonomes pour l'infrastructure">
+<meta name="twitter:description" content="Technologies IoT autonomes en énergie : ni pile, ni câble, plus de 800 m de portée à travers le béton. Première application, l'alerte industrielle.">
+<meta name="twitter:image" content="https://www.sunygreen.com/images/og-sunygreen.jpg">
+
+<!-- La photo d'accueil est le plus grand element affiche : on la demande tot -->
+<link rel="preload" as="image" href="images/sunygreen-01-infrastructures-de-demain.webp" fetchpriority="high">
+<!-- La police est servie depuis ce serveur : aucun appel a un domaine tiers.
+     On la precharge, sinon elle n'est demandee qu'apres analyse de la CSS. -->
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/sora-latin.woff2" crossorigin>
+<link rel="stylesheet" href="assets/styles.css">
+<script>document.documentElement.classList.add('sg-js')</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Organization",
+   "@id": "https://www.sunygreen.com/#organisation",
+   "name": "SunyGreen",
+   "url": "https://www.sunygreen.com/",
+   "email": "contact@sunygreen.com",
+   "description": "Consortium européen développant SunyGreen, des technologies autonomes en énergie destinées aux infrastructures connectées.",
+   "logo": {
+    "@type": "ImageObject",
+    "url": "https://www.sunygreen.com/images/sunygreen-logo.png",
+    "width": 440,
+    "height": 147
+   },
+   "member": [
+    {
+     "@type": "Organization",
+     "name": "BLINQY",
+     "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Charleroi",
+      "addressCountry": "BE"
+     }
+    },
+    {
+     "@type": "Organization",
+     "name": "e-peas"
+    },
+    {
+     "@type": "Organization",
+     "name": "Enfucell"
+    },
+    {
+     "@type": "Organization",
+     "name": "DHF",
+     "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Ovifat",
+      "addressCountry": "BE"
+     }
+    }
+   ]
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://www.sunygreen.com/#site",
+   "url": "https://www.sunygreen.com/",
+   "name": "SunyGreen",
+   "inLanguage": "fr-FR",
+   "publisher": {
+    "@id": "https://www.sunygreen.com/#organisation"
+   }
+  },
+  {
+   "@type": "Product",
+   "name": "SunyGreen",
+   "description": "Technologies autonomes en énergie : récupération photovoltaïque organique, gestion ultra-basse consommation et communication Bluetooth Low Energy Coded PHY au-delà de 800 mètres à travers le béton. Première application, un dispositif d'alerte industrielle sans pile ni câble.",
+   "image": "https://www.sunygreen.com/images/og-sunygreen.jpg",
+   "category": "Technologie IoT autonome en énergie",
+   "brand": {
+    "@id": "https://www.sunygreen.com/#organisation"
+   },
+   "additionalProperty": [
+    {
+     "@type": "PropertyValue",
+     "name": "Portée",
+     "value": "800 m et plus à travers le béton"
+    },
+    {
+     "@type": "PropertyValue",
+     "name": "Alimentation",
+     "value": "Photovoltaïque organique — lumière ambiante"
+    },
+    {
+     "@type": "PropertyValue",
+     "name": "Communication",
+     "value": "Bluetooth Low Energy Coded PHY"
+    },
+    {
+     "@type": "PropertyValue",
+     "name": "Maintenance",
+     "value": "Aucune — ni pile ni câble"
+    }
+   ]
+  }
+ ]
+}
+</script>
 </head>
 <body>
-<x-dc>
-<helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-/* ===================================================================
-   SUN-Link — feuille de style unique.
-   Direction : noir cinematique, photo plein cadre, titres capitales
-   serrees, boutons capitales espacees. Reference : SpaceX / Starlink /
-   The Boring Company.
-   Tout passe par des classes : plus aucun style inline dans la page,
-   donc plus aucun !important necessaire.
-   =================================================================== */
 
-*,*::before,*::after{box-sizing:border-box}
+<a href="#accueil" class="skip">Aller au contenu</a>
 
-:root{
-  --bg:#000;
-  --panel:#0A0B0C;
-  --raise:#111214;
-  --line:rgba(255,255,255,0.13);
-  --line-soft:rgba(255,255,255,0.07);
-  --fg:#fff;
-  --muted:#9AA0A6;
-  --dim:#6E7378;
-  --amber:#FDB022;
-  --wrap:1360px;
-  --gut:48px;
-  --nav:64px;
-}
-
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{
-  margin:0;background:var(--bg);color:var(--fg);
-  font-family:'Sora',system-ui,sans-serif;
-  -webkit-font-smoothing:antialiased;
-}
-img,svg{max-width:100%;display:block}
-a{color:inherit;text-decoration:none}
-a,button{-webkit-tap-highlight-color:rgba(253,176,34,0.2)}
-section[id],header[id],footer[id]{scroll-margin-top:var(--nav)}
-
-/* ---------- primitives ---------- */
-/* Filet de securite : clip (et non hidden) ne cree pas de conteneur de
-   defilement, la barre de navigation collante reste donc collante. Evite
-   qu'un element deborde et fasse apparaitre une barre horizontale. */
-.sl-root{overflow-x:clip}
-.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
-
-.eyebrow{
-  font-size:11px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;
-  color:var(--amber);margin:0 0 18px;
-}
-.eyebrow--dim{color:var(--dim)}
-
-/* Capitales serrees : la signature typographique des sites de reference. */
-h1,h2{text-transform:uppercase;font-weight:800;margin:0;text-wrap:balance}
-h1{font-size:clamp(34px,6.6vw,86px);line-height:0.96;letter-spacing:-0.03em}
-h2{font-size:clamp(27px,4.4vw,56px);line-height:1.02;letter-spacing:-0.025em}
-h3{font-size:19px;font-weight:700;letter-spacing:-0.01em;margin:0}
-
-.lead{font-size:clamp(15px,1.35vw,18px);line-height:1.65;color:#C6CACE;margin:0;text-wrap:pretty}
-h2 + .lead{margin-top:18px}
-.body{font-size:14.5px;line-height:1.68;color:var(--muted);margin:0;text-wrap:pretty}
-.fine{font-size:12px;line-height:1.6;color:var(--dim);margin:0}
-
-/* ---------- boutons ---------- */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:10px;
-  font-family:inherit;font-size:12px;font-weight:700;letter-spacing:0.14em;
-  text-transform:uppercase;padding:15px 32px;border-radius:2px;cursor:pointer;
-  border:1px solid transparent;transition:background .18s ease,color .18s ease,border-color .18s ease;
-  white-space:nowrap;
-}
-.btn--solid{background:var(--fg);color:#000}
-.btn--solid:hover{background:var(--amber)}
-.btn--ghost{border-color:rgba(255,255,255,0.45);color:var(--fg)}
-.btn--ghost:hover{background:var(--fg);color:#000;border-color:var(--fg)}
-.btn-row{display:flex;flex-wrap:wrap;gap:12px}
-
-/* ---------- barre de navigation ---------- */
-.nav{
-  position:sticky;top:0;z-index:60;height:var(--nav);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 var(--gut);
-  background:transparent;border-bottom:1px solid transparent;
-  transition:background .25s ease,border-color .25s ease,backdrop-filter .25s ease;
-}
-.nav.is-stuck{background:rgba(0,0,0,0.82);backdrop-filter:blur(14px);border-bottom-color:var(--line-soft)}
-.brand{display:flex;align-items:center;gap:11px}
-.brand img{width:26px;height:26px;object-fit:contain}
-.brand-txt{font-size:16px;font-weight:700;letter-spacing:0.3em}
-.nav-links{display:flex;align-items:center;gap:32px}
-.nav-links a{
-  font-size:11.5px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;
-  color:#C6CACE;transition:color .16s ease;
-}
-.nav-links a:hover{color:var(--fg)}
-.nav-right{display:flex;align-items:center;gap:16px}
-.lang{display:flex;border:1px solid rgba(255,255,255,0.24);border-radius:2px;overflow:hidden;
-  font-size:10.5px;font-weight:700;letter-spacing:0.1em}
-.lang span{padding:5px 10px}
-.lang .on{background:var(--fg);color:#000}
-.lang .off{color:var(--muted);cursor:pointer}
-.burger{display:flex;flex-direction:column;gap:5px;padding:8px 2px;background:none;border:0;cursor:pointer}
-.burger span{width:22px;height:1.5px;background:var(--fg);display:block;transition:transform .22s ease,opacity .22s ease}
-.burger.is-open span:first-child{transform:translateY(3.25px) rotate(45deg)}
-.burger.is-open span:last-child{transform:translateY(-3.25px) rotate(-45deg)}
-
-.menu{
-  position:absolute;top:100%;right:var(--gut);width:300px;
-  background:rgba(8,9,10,0.97);backdrop-filter:blur(16px);
-  border:1px solid var(--line);border-top:0;padding:10px;
-  display:flex;flex-direction:column;gap:2px;
-  animation:menuIn .18s ease-out;
-}
-@keyframes menuIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-.menu a{
-  padding:14px;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
-  color:#C6CACE;transition:background .15s ease,color .15s ease;
-}
-.menu a:hover{background:rgba(255,255,255,0.06);color:var(--fg)}
-.menu .btn{margin-top:8px}
-
-/* ---------- cadrage dirige des photos plein cadre ----------
-   Ces quatre photos sont en 16/9 avec le sujet dans le tiers droit. Un
-   recadrage centre le fait sortir du cadre des que le format se resserre.
-   object-position exprime la repartition du debordement, pas une position
-   absolue : un seul pourcentage tient donc du grand ecran au telephone,
-   sans media query ni seconde version de l'image. */
-.hero-media img,.panel-media img{width:100%;height:100%;object-fit:cover}
-#sl-hero{object-position:76% center}
-#sl-energie{object-position:74% center}
-#sl-portee{object-position:95% center}
-#sl-install{object-position:56% center}
-
-/* ---------- accueil ---------- */
-.hero{position:relative;min-height:calc(100vh - var(--nav));min-height:calc(100svh - var(--nav));display:flex;overflow:hidden}
-.hero-media{position:absolute;inset:0}
-.hero-scrim{position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(90deg,rgba(0,0,0,0.90) 0%,rgba(0,0,0,0.55) 42%,rgba(0,0,0,0.05) 100%),
-             linear-gradient(0deg,#000 0%,rgba(0,0,0,0.35) 32%,transparent 60%)}
-.hero-inner{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;
-  padding-bottom:96px;padding-top:80px}
-.hero-copy{max-width:920px}
-.hero h1{margin-bottom:22px}
-.hero .lead{max-width:520px;margin-bottom:34px}
-.hero .btn-row{margin-top:2px}
-
-.scroll-cue{
-  position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:3;
-  width:22px;height:22px;border-right:1.5px solid rgba(255,255,255,0.55);
-  border-bottom:1.5px solid rgba(255,255,255,0.55);rotate:45deg;
-  animation:cue 2.2s ease-in-out infinite;
-}
-@keyframes cue{0%,100%{opacity:.25;translate:0 -5px}50%{opacity:.9;translate:0 3px}}
-
-/* ---------- bandeau de chiffres ---------- */
-.stats{border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);background:var(--bg)}
-.stats-grid{display:grid;grid-template-columns:repeat(3,1fr)}
-.stat{padding:38px 0;border-left:1px solid var(--line-soft)}
-.stat:first-child{border-left:0}
-.stat-k{font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--dim);margin:0 0 10px;padding-left:28px}
-.stat-v{font-size:clamp(28px,3.4vw,44px);font-weight:800;letter-spacing:-0.03em;line-height:1;padding-left:28px}
-.stat-u{font-size:13px;color:var(--muted);margin:8px 0 0;padding-left:28px}
-.stat:first-child .stat-k,.stat:first-child .stat-v,.stat:first-child .stat-u{padding-left:0}
-
-/* ---------- panneaux photo plein cadre ---------- */
-.panel{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden;background:#000}
-.panel-media{position:absolute;inset:0}
-.panel-scrim{position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(90deg,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.6) 42%,rgba(0,0,0,0.05) 100%)}
-.panel--right .panel-scrim{
-  background:linear-gradient(270deg,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.6) 42%,rgba(0,0,0,0.05) 100%)}
-.panel-inner{position:relative;z-index:2}
-.panel-copy{max-width:520px}
-.panel--right .panel-copy{margin-left:auto}
-.panel h2{margin-bottom:20px}
-.panel .lead{margin-bottom:32px}
-
-/* ---------- sections neutres ---------- */
-.sec{padding:120px 0;background:var(--bg)}
-.sec--panel{background:var(--panel)}
-.sec-head{max-width:720px;margin-bottom:56px}
-.sec-head--center{margin-left:auto;margin-right:auto;text-align:center}
-.sec-head h2{margin-bottom:16px}
-
-/* ---------- onglets ---------- */
-.tabs{display:flex;justify-content:center;gap:0;margin-bottom:48px}
-.tab{
-  font-family:inherit;font-size:11.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
-  padding:13px 26px;background:none;border:1px solid var(--line);color:var(--muted);cursor:pointer;
-  transition:background .18s ease,color .18s ease;
-}
-.tab + .tab{border-left:0}
-.tab.is-on{background:var(--fg);color:#000;border-color:var(--fg)}
-
-/* ---------- cartes plates ---------- */
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft)}
-.card{background:var(--panel);padding:40px 34px;display:flex;flex-direction:column;
-  transition:background .2s ease}
-.card:hover{background:var(--raise)}
-.card h3{margin-bottom:12px}
-.card .body{flex:1;margin-bottom:26px}
-.card-list{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
-.card-li{display:flex;gap:11px;font-size:13.5px;color:#C6CACE;line-height:1.5}
-.card-li::before{content:'';flex:none;width:5px;height:5px;background:var(--amber);margin-top:7px}
-.card-foot{border-top:1px solid var(--line-soft);padding-top:20px}
-.card-foot .stat-k{padding-left:0;margin-bottom:6px;font-size:10px}
-.card-foot .stat-v{padding-left:0;font-size:26px}
-.card-foot .stat-u{padding-left:0;display:inline;font-size:13px;margin-left:8px}
-
-/* ---------- vignettes terrain ---------- */
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-/* Le cadre doit rester lisible meme avec une photo tres sombre : sans ce
-   filet, une image noire se confond avec le fond noir de la page et la
-   vignette parait collee au fond. Le leger arrondi la designe comme un
-   cadre plutot que comme une zone de la page. */
-.tile-img{
-  aspect-ratio:4/5;overflow:hidden;background:var(--raise);margin-bottom:22px;
-  border:1px solid var(--line);border-radius:8px;
-}
-.tile-img img{width:100%;height:100%;object-fit:cover}
-.tile h3{margin-bottom:10px;font-size:17px}
-
-/* ---------- tableau comparatif ---------- */
-.cmp{width:100%;border-collapse:collapse;font-size:14px}
-.cmp th,.cmp td{text-align:left;padding:18px 20px;border-bottom:1px solid var(--line-soft)}
-.cmp thead th{
-  font-size:10.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--dim);border-bottom-color:var(--line);
-}
-.cmp tbody th{font-weight:600;color:var(--fg);width:26%}
-.cmp td{color:var(--muted)}
-.cmp .col-us{background:rgba(253,176,34,0.05);color:var(--fg);font-weight:600}
-.cmp thead .col-us{color:var(--amber)}
-.cmp tbody tr:last-child td,.cmp tbody tr:last-child th{border-bottom:0}
-.cmp-note{margin-top:22px}
-/* Indice de defilement du tableau : affiche uniquement en dessous de 820px.
-   Doit rester AVANT les media queries, sinon il les ecrase. */
-.cmp-hint{display:none;margin-top:16px;text-align:center}
-
-/* ---------- consortium ---------- */
-.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-soft)}
-.partner{background:var(--panel);padding:34px 28px;transition:background .2s ease}
-.partner:hover{background:var(--raise)}
-/* Les fichiers de logos ont un fond blanc incrusté. Plutôt que de laisser
-   quatre rectangles blancs de tailles différentes flotter sur le noir, on
-   assume une pastille blanche identique pour les quatre. Son rapport (3.4)
-   est calé sur celui des logos pour que le « contain » ne laisse presque
-   aucune bande. */
-.partner-logo{
-  width:100%;max-width:214px;aspect-ratio:214/63;
-  background:#fff;border-radius:3px;margin-bottom:26px;overflow:hidden;
-}
-.partner-logo img{width:100%;height:100%;object-fit:contain}
-.partner h3{font-size:16px;margin-bottom:6px}
-.partner-loc{font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--amber);margin:0 0 10px}
-
-/* ---------- feuille de route ---------- */
-.rail{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:12px}
-.step{position:relative;padding-top:34px}
-.step::before{content:'';position:absolute;top:0;left:0;right:-32px;height:1px;background:var(--line-soft)}
-.step:last-child::before{right:0}
-.step::after{content:'';position:absolute;top:-3.5px;left:0;width:8px;height:8px;border-radius:50%;
-  background:var(--dim)}
-.step--on::after{background:var(--amber)}
-.step-k{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
-  color:var(--dim);margin:0 0 12px}
-.step--on .step-k{color:var(--amber)}
-.step h3{font-size:17px;margin-bottom:10px}
-
-/* ---------- impact ---------- */
-.grid-3-open{display:grid;grid-template-columns:repeat(3,1fr);gap:44px}
-.impact{border-top:2px solid var(--line);padding-top:24px}
-.impact--on{border-top-color:var(--amber)}
-.impact h3{margin-bottom:12px}
-
-/* ---------- contact ---------- */
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
-.contact-meta{margin-top:30px;display:flex;flex-direction:column;gap:14px}
-.meta-row{display:flex;gap:14px;font-size:14px;color:#C6CACE}
-.meta-k{font-size:10.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
-  color:var(--dim);width:82px;flex:none;padding-top:3px}
-.form{display:flex;flex-direction:column;gap:18px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.field{display:flex;flex-direction:column;gap:8px}
-.field > span{font-size:10.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--dim)}
-.field input,.field textarea{
-  font-family:inherit;font-size:15px;color:var(--fg);background:transparent;
-  border:0;border-bottom:1px solid var(--line);padding:12px 0;border-radius:0;
-  transition:border-color .18s ease;
-}
-.field input::placeholder,.field textarea::placeholder{color:#54585C}
-.field input:focus,.field textarea:focus{outline:0;border-bottom-color:var(--amber)}
-.field textarea{resize:vertical;min-height:96px}
-.form .btn{align-self:flex-start;margin-top:6px}
-
-/* ---------- pied de page ---------- */
-.foot{border-top:1px solid var(--line-soft);background:#000;padding:56px 0 40px}
-.foot-top{display:flex;align-items:center;gap:24px;flex-wrap:wrap;
-  padding-bottom:34px;border-bottom:1px solid var(--line-soft)}
-.foot-links{display:flex;gap:26px;flex-wrap:wrap;margin-left:auto}
-.foot-links a{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
-.foot-links a:hover{color:var(--fg)}
-.foot-bot{display:flex;align-items:center;gap:26px;flex-wrap:wrap;padding-top:30px}
-.foot-eu{width:150px;height:46px;flex:none}
-.foot-eu img{width:100%;height:100%;object-fit:contain}
-.foot-bot .fine{max-width:620px}
-.foot-copy{margin-left:auto;font-size:11px;letter-spacing:0.1em;color:var(--dim)}
-
-/* ---------- bandeau cookies ---------- */
-.cookie{
-  position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:100;
-  width:min(860px,calc(100% - 48px));
-  background:rgba(10,11,12,0.97);backdrop-filter:blur(14px);
-  border:1px solid var(--line);padding:20px 24px;
-  display:flex;align-items:center;gap:24px;
-}
-.cookie .fine{flex:1}
-.cookie a{color:var(--amber)}
-.cookie-actions{display:flex;gap:10px;flex:none}
-.cookie-actions .btn{padding:11px 20px;font-size:11px}
-
-/* ---------- apparition au defilement ---------- */
-.sl-js .reveal{opacity:0;transform:translateY(20px)}
-.sl-js .reveal.is-in{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  .sl-js .reveal{opacity:1;transform:none}
-  .scroll-cue{animation:none}
-}
-
-/* ===================================================================
-   RESPONSIVE
-   =================================================================== */
-
-@media (max-width:1180px){
-  :root{--gut:32px}
-  .grid-4{grid-template-columns:repeat(2,1fr)}
-  .rail{grid-template-columns:repeat(2,1fr);row-gap:40px}
-  .contact-grid{gap:48px}
-}
-
-@media (max-width:900px){
-  .nav-links{display:none}
-  .grid-3,.tiles{grid-template-columns:1fr}
-  .grid-3-open{grid-template-columns:1fr;gap:34px}
-  .panel-copy{max-width:none}
-}
-
-@media (max-width:820px){
-  /* Carrousels : empilees, ces cartes prenaient un ecran chacune.
-     La carte suivante depasse : c'est ce qui signale qu'on peut glisser. */
-  .slider{
-    display:flex;gap:14px;background:none;
-    margin:0 calc(var(--gut) * -1);padding:0 var(--gut) 14px;
-    /* overflow-y explicite : sans lui il vaut 'auto' des que overflow-x ne vaut
-       plus 'visible', et le carrousel devient aussi un conteneur de defilement
-       vertical qui avale le geste au lieu de le laisser a la page. */
-    overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;
-    scroll-snap-type:x mandatory;scroll-padding-left:var(--gut);
-    scrollbar-width:none;
-  }
-  .slider::-webkit-scrollbar{display:none}
-  .slider > *{flex:0 0 min(80%,340px);scroll-snap-align:start}
-  .slider .card,.slider .partner{border:1px solid var(--line-soft)}
-
-  /* Tableau : defilement horizontal, colonne SUN-Link ramenee en 2e
-     position pour qu'elle soit lisible sans faire glisser. */
-  .cmp-scroll{overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:none}
-  .cmp-scroll::-webkit-scrollbar{display:none}
-  .cmp{min-width:620px}
-  .cmp .col-us{order:0}
-  .cmp-hint{display:block}
-}
-
-@media (max-width:760px){
-  :root{--gut:20px;--nav:58px}
-  .menu{left:0;right:0;width:auto;border-left:0;border-right:0}
-  .sec{padding:76px 0}
-  .sec-head{margin-bottom:40px}
-
-  /* Le texte reste sur la photo, comme sur grand ecran et comme sur les
-     sites de reference. Ce qui rend ce choix tenable : object-position
-     garde le sujet dans le cadre, et le voile passe en degrade vertical
-     soutenu puisque le texte occupe desormais toute la largeur. */
-  .panel{align-items:flex-end}
-  .hero-inner,.panel-inner{padding-bottom:64px;padding-top:0}
-  .hero-scrim,.panel-scrim{
-    background:linear-gradient(0deg,#000 0%,rgba(0,0,0,0.90) 22%,rgba(0,0,0,0.55) 50%,rgba(0,0,0,0.12) 100%);
-  }
-  .hero .lead,.panel .lead{margin-bottom:26px}
-  .scroll-cue{display:none}
-
-  .stats-grid{grid-template-columns:1fr}
-  .stat{border-left:0;border-top:1px solid var(--line-soft);padding:26px 0}
-  .stat:first-child{border-top:0}
-  .stat-k,.stat-v,.stat-u{padding-left:0}
-
-  .tabs{margin-bottom:32px}
-  .tab{flex:1;padding:12px 10px;font-size:10.5px;letter-spacing:0.1em}
-
-  .contact-grid{grid-template-columns:1fr;gap:44px}
-  .form-row{grid-template-columns:1fr}
-  /* 16px minimum : en dessous, iOS zoome a la saisie */
-  .field input,.field textarea{font-size:16px}
-
-  .foot-links{margin-left:0;gap:14px 20px}
-  .foot-copy{margin-left:0}
-
-  .cookie{left:12px;right:12px;bottom:12px;transform:none;width:auto;
-    flex-direction:column;align-items:stretch;gap:14px;padding:18px}
-  .cookie-actions .btn{flex:1}
-}
-
-@media (max-width:440px){
-  :root{--gut:16px}
-  .lang{display:none}
-  .hero .btn-row .btn,.panel .btn-row .btn{width:100%}
-  .cmp{min-width:560px}
-}
-</style>
-</helmet>
-
-<div class="sl-root">
-
-  <!-- ============ NAVIGATION ============ -->
-  <nav class="nav">
-    <a href="#accueil" class="brand">
-      <img src="images/sl-brand.png" alt="Logo SUN-Link" />
-      <span class="brand-txt">SUN&#8211;LINK</span>
-    </a>
-    <div class="nav-links">
-      <a href="#solution">Solution</a>
-      <a href="#secteurs">Secteurs</a>
-      <a href="#consortium">Consortium</a>
-      <a href="#roadmap">Feuille de route</a>
-    </div>
-    <div class="nav-right">
-      <div class="lang"><span class="on">FR</span><span class="off" title="Version anglaise">EN</span></div>
-      <button onClick="{{ toggleMenu }}" class="{{ burgerClass }}" aria-label="Menu">
-        <span></span><span></span>
+<!-- ============ NAVIGATION ============ -->
+<nav class="nav">
+  <a href="#accueil" class="brand">
+    <img src="images/sunygreen-logo.png" alt="Logo SunyGreen" width="440" height="147" decoding="async" />
+  </a>
+  <div class="nav-links">
+    <a href="#solution">Solution</a>
+    <a href="#secteurs">Secteurs</a>
+    <a href="#consortium">Consortium</a>
+    <a href="#roadmap">Feuille de route</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang" data-langue>
+      <button type="button" class="lang-btn" aria-expanded="false"
+              aria-controls="choix-langue" aria-label="Langue : français. Ouvrir le choix de langue">
+        <span class="lang-drapeau lang-drapeau--fr" aria-hidden="true"></span>
+        <span class="lang-code">FR</span>
+        <span class="lang-chevron" aria-hidden="true"></span>
       </button>
+      <ul class="lang-liste" id="choix-langue" hidden>
+        <li><span class="lang-opt is-on" aria-current="true"><span class="lang-drapeau lang-drapeau--fr" aria-hidden="true"></span>Français</span></li>
+        <li><a class="lang-opt" href="en/index.html" hreflang="en" lang="en"><span class="lang-drapeau lang-drapeau--gb" aria-hidden="true"></span>English</a></li>
+      </ul>
     </div>
-    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
-      <div class="menu">
-        <a href="#solution" onClick="{{ closeMenu }}">Solution</a>
-        <a href="#secteurs" onClick="{{ closeMenu }}">Secteurs</a>
-        <a href="#consortium" onClick="{{ closeMenu }}">Consortium</a>
-        <a href="#roadmap" onClick="{{ closeMenu }}">Feuille de route</a>
-        <a href="#contact" onClick="{{ closeMenu }}" class="btn btn--solid">Nous contacter</a>
-      </div>
-    </sc-if>
-  </nav>
+    <a href="#contact" class="btn btn--solid nav-cta">Nous contacter</a>
+    <button type="button" class="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span>
+    </button>
+  </div>
+  <div class="menu" id="menu" hidden>
+    <a href="#solution">Solution</a>
+    <a href="#secteurs">Secteurs</a>
+    <a href="#consortium">Consortium</a>
+    <a href="#roadmap">Feuille de route</a>
+    <a href="#contact" class="btn btn--solid">Nous contacter</a>
+    <a href="en/index.html" hreflang="en" lang="en" class="menu-lang">English version</a>
+  </div>
+</nav>
 
+<div class="sg-root">
   <!-- ============ ACCUEIL ============ -->
   <header id="accueil" class="hero">
-    <div class="hero-media"><img id="sl-hero" src="images/sl-hero.webp" alt="Bouton SUN-Link installé sur une machine, atelier industriel de nuit" /></div>
+    <div class="hero-media"><img id="photo-accueil" src="images/sunygreen-01-infrastructures-de-demain.webp" alt="Bouton SunyGreen installé sur une machine, atelier industriel de nuit"  width="1388" height="781" decoding="async" fetchpriority="high" /></div>
     <div class="hero-scrim"></div>
     <div class="wrap hero-inner">
       <div class="hero-copy reveal">
-        <p class="eyebrow">Alerte industrielle autonome</p>
-        <h1>Une alerte industrielle fiable et autonome</h1>
-        <p class="lead">Un bouton connecté qui se pose partout, ne réclame ni pile ni câble, et porte à travers le béton d'un bout à l'autre du site.</p>
+        <p class="eyebrow">Construire les infrastructures de demain</p>
+        <h1>Plus de personnes. Plus de besoins. Moins de ressources.</h1>
+        <p class="lead">Alors que la population mondiale augmente et que les infrastructures se développent, les organisations doivent répondre à des besoins toujours plus importants tout en réduisant leur consommation de ressources. SunyGreen développe les technologies autonomes qui rendent cette transformation possible.</p>
         <div class="btn-row">
-          <a href="#solution" class="btn btn--solid">Découvrir la solution</a>
+          <a href="#solution" class="btn btn--solid btn--arrow">Découvrir la solution</a>
           <a href="#contact" class="btn btn--ghost">Nous contacter</a>
         </div>
       </div>
@@ -493,10 +200,10 @@ h2 + .lead{margin-top:18px}
   <!-- ============ CHIFFRES CLÉS ============ -->
   <section class="stats">
     <div class="wrap">
-      <div class="stats-grid reveal">
+      <div class="stats-grid reveal cascade">
         <div class="stat">
           <p class="stat-k">Portée mesurée</p>
-          <div class="stat-v">800 m+</div>
+          <div class="stat-v" data-compte="800" data-suffixe=" m+">800&nbsp;m+</div>
           <p class="stat-u">à travers le béton</p>
         </div>
         <div class="stat">
@@ -506,119 +213,253 @@ h2 + .lead{margin-top:18px}
         </div>
         <div class="stat">
           <p class="stat-k">Installation</p>
-          <div class="stat-v">2 min</div>
+          <div class="stat-v">2&nbsp;min</div>
           <p class="stat-u">sans travaux</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ PANNEAU : ÉNERGIE ============ -->
-  <section id="solution" class="panel">
-    <div class="panel-media"><img id="sl-energie" src="images/sl-energie.webp" alt="Gros plan de la cellule photovoltaïque organique du bouton SUN-Link" /></div>
-    <div class="panel-scrim"></div>
-    <div class="wrap panel-inner">
-      <div class="panel-copy reveal">
-        <p class="eyebrow">Énergie · Photovoltaïque organique</p>
-        <h2>Autonome, pour de bon</h2>
-        <p class="lead">Une cellule photovoltaïque organique alimente SUN-Link à partir de la seule lumière ambiante — l'éclairage d'un atelier suffit. Aucune pile à remplacer, aucun câble à tirer&nbsp;: le bouton fonctionne à vie, sans maintenance.</p>
-        <div class="btn-row"><a href="#terrain" class="btn btn--ghost">En savoir plus</a></div>
+  <!-- ============ CONTEXTE ============ -->
+  <section id="contexte" class="sec sec--light sec--fond">
+    <div class="sec-media"><img src="images/sunygreen-02-monde-sous-pression.webp" alt="Paysage d'infrastructures ferroviaires et industrielles au couchant" width="1388" height="781" decoding="async" loading="lazy" /></div>
+    <div class="sec-voile"></div>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Un monde sous pression</p>
+        <h2>Les infrastructures se développent. Les ressources, elles, restent limitées.</h2>
+        <p class="lead">Une contradiction mondiale se dessine. Partout, les infrastructures deviennent plus connectées, plus complexes et plus essentielles que jamais. Pourtant, les ressources nécessaires pour les alimenter, les entretenir et assurer leur pérennité demeurent limitées. Le défi n'est donc plus seulement de croître, il est de croître durablement.</p>
+      </div>
+      <div class="grid-4-open reveal cascade">
+        <div class="impact">
+          <h3>Plus d'infrastructures</h3>
+          <p class="body">Elles s'étendent dans tous les secteurs, à un rythme qui ne ralentit pas.</p>
+        </div>
+        <div class="impact">
+          <h3>Plus de connectivité</h3>
+          <p class="body">Elle gagne tous les environnements, y compris les moins accessibles.</p>
+        </div>
+        <div class="impact">
+          <h3>Ressources limitées</h3>
+          <p class="body">L'énergie, les matériaux et la maintenance ne sont pas extensibles.</p>
+        </div>
+        <div class="impact">
+          <h3>Attentes croissantes</h3>
+          <p class="body">La sécurité, la performance et la durabilité sont désormais exigées ensemble.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ PANNEAU : PORTÉE ============ -->
-  <section id="portee" class="panel">
-    <div class="panel-media"><img id="sl-portee" src="images/sl-portee.webp" alt="Long couloir en béton traversé par une onde radio jusqu'au bouton SUN-Link" /></div>
-    <div class="panel-scrim"></div>
-    <div class="wrap panel-inner">
-      <div class="panel-copy reveal">
-        <p class="eyebrow">Communication · BLE Coded PHY</p>
-        <h2>Une portée qui traverse le béton</h2>
-        <p class="lead">Grâce au BLE Coded PHY, chaque appel d'assistance porte à plus de 800&nbsp;mètres, d'un bout à l'autre du site — là où la radio classique s'effondre entre les murs. Une évolution du Bluetooth qui parle plus loin, pas plus fort.</p>
-        <div class="btn-row"><a href="#terrain" class="btn btn--ghost">En savoir plus</a></div>
+  <!-- ============ POURQUOI C'EST IMPORTANT ============ -->
+  <section id="enjeu" class="sec sec--panel sec--fond">
+    <div class="sec-media"><img src="images/sunygreen-03-enjeu-humain.webp" alt="Opérateur pressant le boîtier SunyGreen dans une halle industrielle" width="1388" height="781" decoding="async" loading="lazy" /></div>
+    <div class="sec-voile"></div>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Pourquoi c'est important</p>
+        <h2>La défaillance n'est jamais technique. Elle est humaine.</h2>
+        <p class="lead">Les infrastructures existent pour servir les personnes. Demander de l'assistance, accéder à un service, déclencher une alerte&nbsp;: chaque interaction compte, et chacune repose sur une infrastructure qui doit répondre.</p>
+      </div>
+      <div class="grid-4-open reveal cascade">
+        <div class="impact">
+          <h3>Sécurité</h3>
+          <p class="body">Donner l'alerte au moment précis où elle change quelque chose.</p>
+        </div>
+        <div class="impact">
+          <h3>Accessibilité</h3>
+          <p class="body">Un geste simple, à portée de main, quel que soit l'environnement.</p>
+        </div>
+        <div class="impact">
+          <h3>Fiabilité</h3>
+          <p class="body">Un système qui répond sans dépendre d'une pile ni d'un câble.</p>
+        </div>
+        <div class="impact">
+          <h3>Continuité</h3>
+          <p class="body">Un service qui ne s'interrompt pas pour cause de maintenance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BASCULEMENT ============ -->
+  <section id="basculement" class="sec sec--light sec--light-alt sec--fond">
+    <div class="sec-media"><img src="images/sunygreen-04-basculement.webp" alt="Site industriel au lever du jour, panneau listant les gains apportés par SunyGreen" width="1388" height="781" decoding="async" loading="lazy" /></div>
+    <div class="sec-voile"></div>
+    <div class="wrap">
+      <div class="sec-head sec-head--center reveal">
+        <p class="eyebrow">Le basculement</p>
+        <h2>Un nouveau modèle se dessine</h2>
+        <p class="lead">Moins de dépendance, plus de résilience. Une infrastructure ne devrait pas réclamer une intervention permanente pour rester opérationnelle.</p>
+      </div>
+      <div class="bascule reveal cascade">
+        <div class="bascule-ligne"><span class="bascule-moins">Moins de maintenance</span><span class="bascule-plus">Plus de fiabilité</span></div>
+        <div class="bascule-ligne"><span class="bascule-moins">Moins de déchets</span><span class="bascule-plus">Plus de durabilité</span></div>
+        <div class="bascule-ligne"><span class="bascule-moins">Moins de complexité</span><span class="bascule-plus">Plus de simplicité</span></div>
+        <div class="bascule-ligne"><span class="bascule-moins">Moins de dépendance</span><span class="bascule-plus">Plus d'autonomie</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FONCTIONNEMENT ============ -->
+  <section id="solution" class="sec sec--panel sec--trame">
+    <div class="wrap">
+      <div class="sec-head sec-head--center reveal">
+        <p class="eyebrow">Notre réponse</p>
+        <h2>Quatre étapes, aucune pile</h2>
+        <p class="lead">SunyGreen ne reçoit aucune énergie de l'extérieur. Il prélève celle qui se trouve déjà dans son environnement, la conserve, et ne communique qu'au moment utile.</p>
+      </div>
+      <div class="etapes slider reveal cascade">
+        <article class="etape">
+          <div class="etape-img"><img src="images/sunygreen-etape-1-capter.webp" alt="Bouton SunyGreen sur une paroi, sous un symbole de soleil qui projette un faisceau lumineux" width="880" height="1100" decoding="async" loading="lazy" /></div>
+          <h3>Capter</h3>
+          <p class="body">Une cellule photovoltaïque organique prélève l'énergie de la lumière ambiante. L'éclairage d'un atelier suffit&nbsp;: le plein soleil n'est pas nécessaire.</p>
+        </article>
+        <article class="etape">
+          <div class="etape-img"><img src="images/sunygreen-etape-2-stocker.webp" alt="Bouton SunyGreen sur une paroi de béton, à côté d'un symbole de batterie lumineux" width="880" height="1095" decoding="async" loading="lazy" /></div>
+          <h3>Stocker</h3>
+          <p class="body">Un circuit de gestion ultra-basse consommation lisse les apports et constitue une réserve, qui couvre les heures sans lumière.</p>
+        </article>
+        <article class="etape">
+          <div class="etape-img"><img src="images/sunygreen-etape-3-transmettre.webp" alt="Opérateur casqué pressant la touche d'émission du bouton SunyGreen dans une halle industrielle" width="880" height="1100" decoding="async" loading="lazy" /></div>
+          <h3>Transmettre</h3>
+          <p class="body">Le BLE Coded PHY porte l'information au-delà de 800&nbsp;mètres, à travers le béton, pour une dépense d'énergie minime.</p>
+        </article>
+        <article class="etape">
+          <div class="etape-img"><img src="images/sunygreen-etape-4-agir.webp" alt="Montre connectée au poignet d'un intervenant affichant une alerte de danger en zone 2" width="880" height="1100" decoding="async" loading="lazy" /></div>
+          <h3>Agir</h3>
+          <p class="body">L'alerte atteint la personne concernée. Sans câblage, sans passerelle dédiée, sans intervention.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ IMPACT ============ -->
+  <section id="impact" class="sec sec--light sec--fond">
+    <div class="sec-media"><img src="images/sunygreen-06-impact.webp" alt="Site industriel intégré dans une vallée boisée, à la lumière du matin" width="1388" height="781" decoding="async" loading="lazy" /></div>
+    <div class="sec-voile"></div>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Impact</p>
+        <h2>Ce que change l'autonomie énergétique</h2>
+      </div>
+      <div class="grid-3-open reveal cascade">
+        <div class="impact impact--on">
+          <h3>Environnemental</h3>
+          <p class="body">Moins de déchets, moins de ressources consommées, une empreinte réduite&nbsp;: chaque dispositif déployé, ce sont des piles jetables évitées à vie.</p>
+        </div>
+        <div class="impact">
+          <h3>Économique</h3>
+          <p class="body">Moins de maintenance, plus de disponibilité, un déploiement plus rapide&nbsp;: le coût total de possession chute et l'efficacité progresse.</p>
+        </div>
+        <div class="impact">
+          <h3>Stratégique</h3>
+          <p class="body">Des interactions plus sûres et une continuité de service améliorée, portées par une chaîne de valeur IoT conçue et validée en Europe.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ============ SECTEURS ============ -->
-  <section id="secteurs" class="sec sec--panel">
+  <section id="secteurs" class="sec sec--light sec--light-alt sec--fond">
+    <div class="sec-media"><img src="images/sunygreen-07-applications.webp" alt="Mosaïque de neuf environnements : bureaux, industrie, mine, tunnel, supervision, transport, logistique, énergie, traitement des eaux" width="1388" height="781" decoding="async" loading="lazy" /></div>
+    <div class="sec-voile"></div>
     <div class="wrap">
       <div class="sec-head sec-head--center reveal">
-        <p class="eyebrow">Cas d'usage</p>
-        <h2>Conçu pour les environnements exigeants</h2>
-        <p class="lead">Là où l'appel d'assistance et l'alerte sécurité se heurtent aux piles, au câblage ou à la portée.</p>
+        <p class="eyebrow">Applications</p>
+        <h2>Une plateforme, de multiples environnements</h2>
+        <p class="lead">Une même technologie répond partout où l'énergie, le câblage ou la portée font obstacle. Le projet se concentre d'abord sur trois secteurs prioritaires, les autres viendront ensuite.</p>
       </div>
-      <div class="tabs reveal">
-        <button onClick="{{ setPrio }}" class="{{ prioClass }}">Secteurs prioritaires</button>
-        <button onClick="{{ setExt }}" class="{{ extClass }}">Extensions à venir</button>
+      <div class="tabs reveal" role="tablist" aria-label="Familles de secteurs">
+        <button type="button" class="tab is-on" role="tab" id="tab-prio" aria-controls="secteurs-prio" aria-selected="true">Secteurs prioritaires</button>
+        <button type="button" class="tab" role="tab" id="tab-ext" aria-controls="secteurs-ext" aria-selected="false">Extensions à venir</button>
       </div>
-      <div key="{{ sectorKey }}" class="grid-3 slider reveal">
-        <sc-for list="{{ cards }}" as="card" hint-placeholder-count="3">
-          <div class="card">
-            <h3>{{ card.title }}</h3>
-            <p class="body">{{ card.desc }}</p>
+      <div class="grid-3 slider reveal cascade" id="secteurs-prio" data-secteurs role="tabpanel" aria-labelledby="tab-prio">
+          <article class="card">
+            <h3>Industrie &amp; usines</h3>
+            <p class="body">Signaler une panne machine, appeler la maintenance ou demander un approvisionnement au poste, sans jamais arrêter la ligne.</p>
             <div class="card-list">
-              <div class="card-li">{{ card.b1 }}</div>
-              <div class="card-li">{{ card.b2 }}</div>
+              <div class="card-li">Appel d'assistance au poste</div>
+              <div class="card-li">Alerte machine en temps réel</div>
             </div>
             <div class="card-foot">
-              <p class="stat-k">{{ card.statLabel }}</p>
-              <span class="stat-v">{{ card.statVal }}</span><span class="stat-u">{{ card.statUnit }}</span>
+              <p class="stat-k">Portée</p>
+              <span class="stat-v">800&nbsp;m+</span><span class="stat-u">à travers le béton</span>
             </div>
-          </div>
-        </sc-for>
+          </article>
+          <article class="card">
+            <h3>Mines</h3>
+            <p class="body">Donner l'alerte et communiquer là où le câblage est impossible, et où chaque minute compte.</p>
+            <div class="card-list">
+              <div class="card-li">Alerte sécurité instantanée</div>
+              <div class="card-li">Aucun câblage requis</div>
+            </div>
+            <div class="card-foot">
+              <p class="stat-k">Autonomie</p>
+              <span class="stat-v">À vie</span><span class="stat-u">zéro pile</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>Logistique</h3>
+            <p class="body">Appeler un cariste, signaler un quai ou demander une intervention dans de vastes entrepôts réaménagés en permanence.</p>
+            <div class="card-list">
+              <div class="card-li">Appel de cariste</div>
+              <div class="card-li">Signalement de quai</div>
+            </div>
+            <div class="card-foot">
+              <p class="stat-k">Installation</p>
+              <span class="stat-v">2&nbsp;min</span><span class="stat-u">sans travaux</span>
+            </div>
+          </article>
+      </div>
+      <div class="grid-3 slider reveal cascade" id="secteurs-ext" data-secteurs role="tabpanel" aria-labelledby="tab-ext" hidden>
+          <article class="card">
+            <h3>Hôtellerie</h3>
+            <p class="body">Appel discret du personnel et demande de service dans les chambres et espaces communs.</p>
+            <div class="card-list">
+              <div class="card-li">Appel discret du personnel</div>
+              <div class="card-li">Zéro maintenance visible</div>
+            </div>
+            <div class="card-foot">
+              <p class="stat-k">Statut</p>
+              <span class="stat-v">À l'étude</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>Infrastructures critiques</h3>
+            <p class="body">Signalement et supervision là où la fiabilité prime et où le secteur n'est pas garanti.</p>
+            <div class="card-list">
+              <div class="card-li">Fiabilité longue durée</div>
+              <div class="card-li">Sans dépendance secteur</div>
+            </div>
+            <div class="card-foot">
+              <p class="stat-k">Statut</p>
+              <span class="stat-v">À l'étude</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>Médical</h3>
+            <p class="body">Appel d'assistance patient / soignant, hors contraintes de câblage et de manipulation.</p>
+            <div class="card-list">
+              <div class="card-li">Appel d'assistance rapide</div>
+              <div class="card-li">Hygiène, aucune pile à manipuler</div>
+            </div>
+            <div class="card-foot">
+              <p class="stat-k">Statut</p>
+              <span class="stat-v">À l'étude</span>
+            </div>
+          </article>
       </div>
       <p class="fine cmp-note">Les portées et autonomies indiquées correspondent aux cibles du projet, en cours de validation en conditions réelles chez le client pilote.</p>
     </div>
   </section>
 
-  <!-- ============ VIGNETTES TERRAIN ============ -->
-  <section class="sec">
-    <div class="wrap">
-      <div class="sec-head sec-head--center reveal">
-        <h2>Pensé pour le terrain, du poste à la zone la plus isolée</h2>
-      </div>
-      <div class="tiles slider reveal">
-        <div class="tile">
-          <div class="tile-img"><img id="sl-grid-1" src="images/sl-grid-1.webp" alt="Bouton SUN-Link posé sur du béton, sans pile ni câble" /></div>
-          <h3>Zéro pile, zéro câble</h3>
-          <p class="body">Alimenté par la lumière, SUN-Link ne réclame ni batterie ni câblage&nbsp;: aucun déchet, aucune maintenance.</p>
-        </div>
-        <div class="tile">
-          <div class="tile-img"><img id="sl-grid-2" src="images/sl-grid-2.webp" alt="Halle industrielle en enfilade, illustrant la portée longue distance" /></div>
-          <h3>Longue portée réelle</h3>
-          <p class="body">Plus de 800&nbsp;m à travers le béton grâce au BLE Coded PHY, là où les radios classiques abandonnent.</p>
-        </div>
-        <div class="tile">
-          <div class="tile-img"><img id="sl-grid-3" src="images/sl-grid-3.webp" alt="Main gantée pressant le bouton SUN-Link fixé sur une machine" /></div>
-          <h3>Installé en deux minutes</h3>
-          <p class="body">Se fixe au poste, sur une machine ou en zone isolée, et fonctionne immédiatement, sans travaux.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ PANNEAU : INSTALLATION ============ -->
-  <section id="terrain" class="panel">
-    <div class="panel-media"><img id="sl-install" src="images/sl-install.webp" alt="Technicien posant un bouton SUN-Link sur un mur en béton" /></div>
-    <div class="panel-scrim"></div>
-    <div class="wrap panel-inner">
-      <div class="panel-copy reveal">
-        <p class="eyebrow">Déploiement</p>
-        <h2>Posez-le. Il se connecte.</h2>
-        <p class="lead">SUN-Link est conçu pour une installation autonome&nbsp;: fixez-le où le besoin existe, il rejoint votre supervision en quelques secondes. Sans travaux, sans électricien, sans arrêt de production.</p>
-        <div class="btn-row"><a href="#contact" class="btn btn--solid">Voir la démonstration</a></div>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ COMPARAISON ============ -->
-  <section class="sec sec--panel">
+  <section class="sec sec--panel sec--trame">
     <div class="wrap">
       <div class="sec-head sec-head--center reveal">
         <p class="eyebrow">Comparatif</p>
-        <h2>Pourquoi SUN-Link est différent</h2>
+        <h2>Pourquoi SunyGreen est différent</h2>
       </div>
       <div class="cmp-scroll reveal">
         <table class="cmp">
@@ -627,7 +468,7 @@ h2 + .lead{margin-top:18px}
               <th>Critère</th>
               <th>Boutons à piles</th>
               <th>Systèmes filaires</th>
-              <th class="col-us">SUN-Link</th>
+              <th class="col-us">SunyGreen</th>
             </tr>
           </thead>
           <tbody>
@@ -635,7 +476,7 @@ h2 + .lead{margin-top:18px}
               <th>Énergie</th>
               <td>Piles à remplacer</td>
               <td>Alimentation secteur</td>
-              <td class="col-us">Autonome — lumière</td>
+              <td class="col-us">Autonome, par la lumière</td>
             </tr>
             <tr>
               <th>Installation</th>
@@ -663,34 +504,34 @@ h2 + .lead{margin-top:18px}
   </section>
 
   <!-- ============ CONSORTIUM ============ -->
-  <section id="consortium" class="sec">
+  <section id="consortium" class="sec sec--light sec--tight">
     <div class="wrap">
       <div class="sec-head sec-head--center reveal">
         <p class="eyebrow">Le consortium</p>
         <h2>Une chaîne de compétences européenne</h2>
         <p class="lead">Chaque partenaire apporte un maillon de la solution, du composant à la validation en conditions réelles.</p>
       </div>
-      <div class="grid-4 slider reveal">
+      <div class="grid-4 slider reveal cascade">
         <div class="partner">
-          <div class="partner-logo"><img id="sl-logo-blinqy" src="images/sl-logo-blinqy.webp" alt="Logo BLINQY" /></div>
+          <div class="partner-logo"><img id="logo-blinqy" src="images/logo-blinqy.webp" alt="Logo BLINQY"  width="428" height="132" decoding="async" loading="lazy" /></div>
           <h3>BLINQY</h3>
           <p class="partner-loc">Charleroi · Belgique</p>
           <p class="body">Conception du nœud IoT et de l'électronique embarquée.</p>
         </div>
         <div class="partner">
-          <div class="partner-logo"><img id="sl-logo-epeas" src="images/sl-logo-epeas.webp" alt="Logo e-peas" /></div>
+          <div class="partner-logo"><img id="logo-epeas" src="images/logo-e-peas.webp" alt="Logo e-peas"  width="223" height="65" decoding="async" loading="lazy" /></div>
           <h3>e-peas</h3>
           <p class="partner-loc">Partenaire</p>
           <p class="body">Gestion de puissance ultra-basse consommation (PMIC).</p>
         </div>
         <div class="partner">
-          <div class="partner-logo"><img id="sl-logo-enfucell" src="images/sl-logo-enfucell.webp" alt="Logo Enfucell" /></div>
+          <div class="partner-logo"><img id="logo-enfucell" src="images/logo-enfucell.webp" alt="Logo Enfucell"  width="189" height="52" decoding="async" loading="lazy" /></div>
           <h3>Enfucell</h3>
           <p class="partner-loc">Partenaire</p>
           <p class="body">Stockage d'énergie souple associé à la récupération OPV.</p>
         </div>
         <div class="partner">
-          <div class="partner-logo"><img id="sl-logo-dhf" src="images/sl-logo-dhf.webp" alt="Logo DHF" /></div>
+          <div class="partner-logo"><img id="logo-dhf" src="images/logo-dhf.webp" alt="Logo DHF"  width="300" height="90" decoding="async" loading="lazy" /></div>
           <h3>DHF</h3>
           <p class="partner-loc">Ovifat · Client pilote</p>
           <p class="body">Validation en environnement opérationnel réel.</p>
@@ -700,96 +541,101 @@ h2 + .lead{margin-top:18px}
   </section>
 
   <!-- ============ FEUILLE DE ROUTE ============ -->
-  <section id="roadmap" class="sec sec--panel">
+  <section id="roadmap" class="sec sec--panel sec--trame">
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="eyebrow">Feuille de route</p>
-        <h2>Du laboratoire au terrain en 9 mois</h2>
-        <p class="lead">Le projet fait progresser SUN-Link du <strong>TRL&nbsp;5</strong> — validé en laboratoire — au <strong>TRL&nbsp;7</strong> — prototype démontré en conditions réelles chez le client.</p>
+        <h2>Du laboratoire au terrain en 9&nbsp;mois</h2>
+        <p class="lead">Le projet fait progresser SunyGreen du <strong>TRL&nbsp;5</strong>, validé en laboratoire, jusqu'au <strong>TRL&nbsp;7</strong>, c'est-à-dire un prototype démontré en conditions réelles chez le client.</p>
       </div>
-      <div class="rail reveal">
+      <div class="rail reveal cascade">
         <div class="step step--on">
-          <p class="step-k">Mois 1–2 · TRL 5</p>
+          <p class="step-k">Mois 1 à 2 · TRL 5</p>
           <h3>Consolidation</h3>
           <p class="body">Validation laboratoire consolidée, spécifications du nœud autonome et de la chaîne logicielle.</p>
         </div>
         <div class="step">
-          <p class="step-k">Mois 3–5 · TRL 6</p>
+          <p class="step-k">Mois 3 à 5 · TRL 6</p>
           <h3>Prototype intégré</h3>
           <p class="body">Intégration OPV + PMIC + BLE longue portée, firmware basse consommation, tests représentatifs.</p>
         </div>
         <div class="step">
-          <p class="step-k">Mois 6–8 · TRL 6→7</p>
+          <p class="step-k">Mois 6 à 8 · TRL 6 vers 7</p>
           <h3>Déploiement pilote</h3>
           <p class="body">Installation chez DHF (Ovifat), mesures de portée et d'autonomie en conditions industrielles réelles.</p>
         </div>
         <div class="step step--on">
           <p class="step-k">Mois 9 · TRL 7</p>
           <h3>Démonstration</h3>
-          <p class="body">Prototype démontré en environnement opérationnel&nbsp;: jalon final du dossier JEWEL.</p>
+          <p class="body">Prototype démontré en environnement opérationnel&nbsp;: jalon final du projet.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ IMPACT ============ -->
-  <section class="sec">
+  <!-- ============ L'AVENIR ============ -->
+  <section id="avenir" class="sec sec--light sec--light-alt">
     <div class="wrap">
       <div class="sec-head reveal">
-        <p class="eyebrow">Impact</p>
-        <h2>Ce que change un bouton sans pile</h2>
-      </div>
-      <div class="grid-3-open reveal">
-        <div class="impact impact--on">
-          <h3>Environnemental</h3>
-          <p class="body">Chaque bouton déployé, c'est des piles jetables évitées à vie&nbsp;: moins de déchets, moins de logistique de remplacement.</p>
-        </div>
-        <div class="impact">
-          <h3>Économique</h3>
-          <p class="body">Pas de câblage, pas de maintenance de piles, pas d'arrêt de production&nbsp;: le coût total de possession chute.</p>
-        </div>
-        <div class="impact">
-          <h3>Stratégique</h3>
-          <p class="body">Une chaîne de valeur IoT conçue et validée en Europe, au service de la souveraineté numérique.</p>
-        </div>
+        <p class="eyebrow">L'avenir</p>
+        <h2>La prochaine génération d'infrastructures a déjà commencé</h2>
+        <p class="lead">Plus durable. Plus résiliente. Plus humaine. Construire de meilleures infrastructures n'est plus une ambition, c'est devenu une nécessité.</p>
+        <div class="btn-row"><a href="#contact" class="btn btn--solid btn--arrow">Parlons de votre projet</a></div>
       </div>
     </div>
   </section>
 
   <!-- ============ CONTACT ============ -->
-  <section id="contact" class="sec sec--panel">
+  <section id="contact" class="sec sec--panel sec--wide sec--ondes">
     <div class="wrap">
       <div class="contact-grid">
         <div class="reveal">
           <p class="eyebrow">Contact</p>
           <h2>Parlons de votre terrain</h2>
-          <p class="lead">Évaluateur, partenaire ou industriel intéressé par un pilote&nbsp;: écrivez-nous, nous répondons rapidement.</p>
+          <p class="lead">Vous êtes évaluateur, partenaire ou industriel intéressé par un pilote&nbsp;? Écrivez-nous, nous vous répondrons rapidement.</p>
           <div class="contact-meta">
-            <div class="meta-row"><span class="meta-k">Email</span>contact@sun-link.eu</div>
-            <div class="meta-row"><span class="meta-k">Projet</span>Consortium SUN-Link · Programme JEWEL</div>
+            <div class="meta-row"><span class="meta-k">Email</span>contact@sunygreen.com</div>
+            <div class="meta-row"><span class="meta-k">Projet</span>Consortium SunyGreen</div>
           </div>
         </div>
-        <form class="form reveal" onSubmit="{{ onFormSubmit }}">
+        <!-- Envoi par Web3Forms : aucun serveur propre, le message part par
+             email. La cle d'acces se remplace dans les deux versions du site
+             (ici et dans en/index.html) — voir DEPLOIEMENT.md. -->
+        <form class="form reveal"
+              action="https://api.web3forms.com/submit" method="POST"
+              data-envoi="Envoi en cours…"
+              data-succes-bouton="Message envoyé ✓"
+              data-succes="Merci, votre message est parti. Nous revenons vers vous rapidement."
+              data-erreur="L'envoi a échoué. Réessayez, ou écrivez directement à contact@sunygreen.com.">
+          <input type="hidden" name="access_key" value="REMPLACER-PAR-LA-CLE-WEB3FORMS">
+          <input type="hidden" name="subject" value="SunyGreen : nouveau message depuis le site">
+          <input type="hidden" name="from_name" value="Site SunyGreen">
+          <!-- Piege a robots : un humain ne remplit jamais un champ invisible. -->
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="form-row">
-            <label class="field"><span>Nom</span><input type="text" placeholder="Votre nom" /></label>
-            <label class="field"><span>Organisation</span><input type="text" placeholder="Entreprise / institution" /></label>
+            <label class="field"><span>Nom</span><input type="text" name="Nom" required autocomplete="name" placeholder="Votre nom" /></label>
+            <label class="field"><span>Organisation</span><input type="text" name="Organisation" autocomplete="organization" placeholder="Entreprise / institution" /></label>
           </div>
-          <label class="field"><span>Email</span><input type="email" placeholder="vous@exemple.com" /></label>
-          <label class="field"><span>Message</span><textarea rows="4" placeholder="Votre message…"></textarea></label>
-          <button type="submit" class="btn btn--solid">{{ submitLabel }}</button>
-          <p class="fine">Données utilisées uniquement pour répondre à votre demande, conformément à notre <a href="#legal">politique de confidentialité</a>. Aucun serveur propre.</p>
+          <label class="field"><span>Email</span><input type="email" name="Email" required autocomplete="email" placeholder="vous@exemple.com" /></label>
+          <label class="field"><span>Message</span><textarea name="Message" rows="4" required placeholder="Votre message…"></textarea></label>
+          <label class="consent">
+            <input type="checkbox" name="Consentement" value="oui" required />
+            <span>J'accepte que mes données soient utilisées pour répondre à ma demande.</span>
+          </label>
+          <button type="submit" class="btn btn--solid">Envoyer le message</button>
+          <p class="form-etat" role="status" aria-live="polite"></p>
+          <p class="fine">Données utilisées uniquement pour répondre à votre demande, conservées 3&nbsp;ans, conformément à notre <a href="confidentialite.html">politique de confidentialité</a>. Aucun serveur propre&nbsp;: l'envoi transite par Web3Forms.</p>
         </form>
       </div>
     </div>
   </section>
 
   <!-- ============ PIED DE PAGE ============ -->
-  <footer id="legal" class="foot">
+  <footer class="foot">
     <div class="wrap">
       <div class="foot-top">
         <a href="#accueil" class="brand">
-          <img src="images/sl-brand.png" alt="Logo SUN-Link" />
-          <span class="brand-txt">SUN&#8211;LINK</span>
+          <img src="images/sunygreen-logo.png" alt="Logo SunyGreen" width="440" height="147" decoding="async" loading="lazy" />
         </a>
         <div class="foot-links">
           <a href="#solution">Solution</a>
@@ -797,101 +643,28 @@ h2 + .lead{margin-top:18px}
           <a href="#consortium">Consortium</a>
           <a href="#roadmap">Feuille de route</a>
           <a href="#contact">Contact</a>
-          <a href="#legal">Mentions légales</a>
-          <a href="#legal">Confidentialité</a>
+          <a href="mentions-legales.html">Mentions légales</a>
+          <a href="confidentialite.html">Confidentialité</a>
+          <a href="cookies.html">Cookies</a>
         </div>
       </div>
       <div class="foot-bot">
-        <div class="foot-eu"><img id="sl-logos-ue" src="images/sl-logos-ue.webp" alt="Logo du programme européen JEWEL" /></div>
-        <p class="fine">Projet financé par la subvention européenne <strong>JEWEL</strong>. Les contenus de ce site n'engagent que le consortium SUN-Link et ne reflètent pas nécessairement l'opinion de l'Union européenne.</p>
-        <div class="foot-copy">© 2026 SUN-Link</div>
+        <div class="foot-copy">© 2026 SunyGreen</div>
       </div>
     </div>
   </footer>
 
   <!-- ============ BANDEAU COOKIES ============ -->
-  <sc-if value="{{ showCookieBanner }}" hint-placeholder-val="{{ false }}">
-    <div class="cookie">
-      <p class="fine">Ce site n'utilise que des cookies strictement nécessaires. Aucun traceur publicitaire. <a href="#legal">En savoir plus</a>.</p>
-      <div class="cookie-actions">
-        <button onClick="{{ declineCookies }}" class="btn btn--ghost">Refuser</button>
-        <button onClick="{{ acceptCookies }}" class="btn btn--solid">Accepter</button>
-      </div>
+  <div class="cookie">
+    <p class="fine">Ce site n'utilise que des cookies strictement nécessaires. Aucun traceur publicitaire. <a href="cookies.html">En savoir plus</a>.</p>
+    <div class="cookie-actions">
+      <button type="button" class="btn btn--ghost" data-choix="refuse">Refuser</button>
+      <button type="button" class="btn btn--solid" data-choix="accepte">Accepter</button>
     </div>
-  </sc-if>
+  </div>
 
 </div>
-</x-dc>
 
-<script>
-/* Apparition au defilement + etat de la barre de navigation.
-   Sans framework : le composant est monte de facon asynchrone par le
-   runtime, on observe donc le DOM pour rattacher les observateurs.
-   La classe sl-js n'est posee que si ce script tourne : si le CDN
-   tombe, le contenu reste visible au lieu de rester a opacity 0. */
-(function () {
-  document.documentElement.classList.add('sl-js');
-  var bound = new WeakSet();
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
-    });
-  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
-
-  function scan() {
-    document.querySelectorAll('.reveal').forEach(function (el) {
-      if (bound.has(el)) return;
-      bound.add(el);
-      io.observe(el);
-    });
-    var nav = document.querySelector('.nav');
-    if (nav && !bound.has(nav)) {
-      bound.add(nav);
-      var onScroll = function () { nav.classList.toggle('is-stuck', window.scrollY > 24); };
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
-    }
-  }
-  new MutationObserver(scan).observe(document.documentElement, { childList: true, subtree: true });
-  scan();
-})();
-</script>
-
-<script type="text/x-dc" data-dc-script>
-class Component extends DCLogic {
-  state = { sector: 'prio', sent: false, cookieChoice: null, menuOpen: false };
-  renderVals() {
-    const PRIO = [
-      { title: 'Industrie & usines', desc: "Signalement de panne machine, appel de maintenance, demande d'approvisionnement au poste — sans arrêter la ligne.", b1: "Appel d'assistance au poste", b2: 'Alerte machine en temps réel', statLabel: 'Portée', statVal: '800 m+', statUnit: 'à travers le béton' },
-      { title: 'Mines', desc: "Alerte sécurité et communication opérationnelle là où le câblage est impossible et où chaque minute compte.", b1: 'Alerte sécurité instantanée', b2: 'Aucun câblage requis', statLabel: 'Autonomie', statVal: 'À vie', statUnit: 'zéro pile' },
-      { title: 'Logistique', desc: "Appel de cariste, signalement de quai, demande d'intervention dans de vastes entrepôts reconfigurés en permanence.", b1: 'Appel de cariste', b2: 'Signalement de quai', statLabel: 'Installation', statVal: '2 min', statUnit: 'sans travaux' },
-    ];
-    const EXT = [
-      { title: 'Hôtellerie', desc: "Appel discret du personnel et demande de service dans les chambres et espaces communs.", b1: 'Appel discret du personnel', b2: 'Zéro maintenance visible', statLabel: 'Statut', statVal: "À l'étude", statUnit: '' },
-      { title: 'Infrastructures critiques', desc: "Signalement et supervision là où la fiabilité prime et où le secteur n'est pas garanti.", b1: 'Fiabilité longue durée', b2: 'Sans dépendance secteur', statLabel: 'Statut', statVal: "À l'étude", statUnit: '' },
-      { title: 'Médical', desc: "Appel d'assistance patient / soignant, hors contraintes de câblage et de manipulation.", b1: "Appel d'assistance rapide", b2: 'Hygiène — sans pile à manipuler', statLabel: 'Statut', statVal: "À l'étude", statUnit: '' },
-    ];
-    const isPrio = this.state.sector === 'prio';
-    const mo = this.state.menuOpen;
-    return {
-      cards: isPrio ? PRIO : EXT,
-      sectorKey: 'sec-' + this.state.sector,
-      setPrio: () => this.setState({ sector: 'prio' }),
-      setExt: () => this.setState({ sector: 'ext' }),
-      prioClass: 'tab' + (isPrio ? ' is-on' : ''),
-      extClass: 'tab' + (!isPrio ? ' is-on' : ''),
-      menuOpen: mo,
-      burgerClass: 'burger' + (mo ? ' is-open' : ''),
-      toggleMenu: () => this.setState({ menuOpen: !this.state.menuOpen }),
-      closeMenu: () => this.setState({ menuOpen: false }),
-      showCookieBanner: this.state.cookieChoice === null,
-      acceptCookies: () => this.setState({ cookieChoice: 'accepted' }),
-      declineCookies: () => this.setState({ cookieChoice: 'declined' }),
-      submitLabel: this.state.sent ? 'Message envoyé ✓' : 'Envoyer le message',
-      onFormSubmit: (e) => { e.preventDefault(); this.setState({ sent: true }); setTimeout(() => this.setState({ sent: false }), 2500); },
-    };
-  }
-}
-</script>
+<script src="assets/site.js" defer></script>
 </body>
 </html>

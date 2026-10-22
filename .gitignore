@@ -1,0 +1,13 @@
+# Originaux haute definition des photos : conserves hors du site publie.
+/sources-images/
+
+# Archives et fichiers de travail qui n'ont rien a faire dans le depot.
+# Documents de travail : ils vivent a cote du site, pas dedans.
+*.docx
+*.doc
+*.pdf
+
+*.zip
+*.rar
+Thumbs.db
+.DS_Store
